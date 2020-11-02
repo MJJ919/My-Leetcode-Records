@@ -1,3 +1,13 @@
+'''
+
+'''
+
+'''
+Method below finds the shortest string first. Then compare the shortest one with others.
+Time:O(n)
+Space:O(1) I guess. Not sure.
+'''
+
 class Solution(object):
     def longestCommonPrefix(self, strs):
         """
@@ -12,4 +22,4 @@ class Solution(object):
             for str in strs:
                 if str[i] != ch:
                     return shortest[:i]
-        return shortest14. Longest Common Prefix
+        return shortest
