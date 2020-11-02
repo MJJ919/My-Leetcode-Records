@@ -13,6 +13,8 @@ class Solution(object):
        
 '''
 Method below does not convert int to str
+Time:O(n)
+Space:O(1)
 '''
 
 class Solution(object):
