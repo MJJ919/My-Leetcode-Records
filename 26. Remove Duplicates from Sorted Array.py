@@ -4,7 +4,9 @@ Do not allocate extra space for another array, you must do this by modifying the
 '''
 
 '''
-I don't want to use set here. It's just a clever trick 
+Method below uses 2 pointers.
+Time:O(n)
+Space:O(1)
 '''
 
 class Solution(object):
