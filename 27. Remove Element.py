@@ -20,16 +20,24 @@ class Solution(object):
         :type val: int
         :rtype: int
         """
-        i = j = 0
-        for num in nums:
-            if num != val:
-                nums[i] = nums[j]
+        i=0
+        for j in range(len(nums)):
+            if nums[j]!=val:
+                nums[i]=nums[j]
                 i += 1
-                j += 1
-            else:
-                j += 1
         return i
 
+class Solution(object):
+    def removeElement(self, nums, val):
+        i,j=0,len(nums)
+        while i<j:
+            if nums[i]==val:
+                nums[i]=nums[j-1]
+                j -= 1
+            else:
+                i += 1
+        return j
+    
 '''
 Method below doesn't use pointers
 '''
