@@ -39,9 +39,10 @@ Space:O(1)
 '''
 class Solution(object):
     def removeDuplicates(self, nums):
-        a = 0
-        for i in nums:
-            if a<=1 or nums[a-2]!=i:
-                nums[a]=i
-                a+=1
-        return a
+        i = 2
+        while i<len(nums):
+            if nums[i-2]==nums[i]:
+                nums.pop(i)
+                i -= 1
+            i += 1
+        return i
