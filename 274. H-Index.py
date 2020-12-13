@@ -1,4 +1,5 @@
 '''
+274 gives an unsorted list while 275 gives a sorted one.
 https://leetcode.com/problems/h-index/
 Given an array of citations (each citation is a non-negative integer) of a researcher, write a function to compute the researcher's h-index.
 According to the definition of h-index on Wikipedia: 
@@ -13,7 +14,7 @@ Explanation: [3,0,6,1,5] means the researcher has 5 papers in total and each of 
              two with no more than 3 citations each, her h-index is 3.
 '''
 '''
-Time:O(lgn)
+Time:O(nlgn)
 Space:O(n)
 '''
 class Solution(object):
@@ -31,3 +32,19 @@ class Solution(object):
             else:
                 r = mid-1
         return l
+      
+'''
+Time:O(nlgn)
+Space:O(1)
+'''
+class Solution(object):
+    def hIndex(self, citations):
+        """
+        :type citations: List[int]
+        :rtype: int
+        """
+        citations.sort()
+        for i,ch in enumerate(citations):
+            if ch>=len(citations)-i:
+                return len(citations)-i
+        return 0
