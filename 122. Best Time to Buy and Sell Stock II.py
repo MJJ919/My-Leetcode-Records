@@ -5,15 +5,18 @@ Design an algorithm to find the maximum profit. You may complete as many transac
 
 Note: You may not engage in multiple transactions at the same time (i.e., you must sell the stock before you buy again).
 '''
+'''
+Time:O(n)
+Space:O(1)
+'''
 class Solution(object):
     def maxProfit(self, prices):
         """
         :type prices: List[int]
         :rtype: int
         """
-        pro = []
-        for i in range(len(prices)-1) :
-            if prices[i+1] > prices[i] :
-                profit = prices[i+1] - prices[i]
-                pro.append (profit)
-        return sum(pro)
+        profit = 0
+        for i in range(len(prices)-1):
+            if prices[i+1]>prices[i]:
+                profit += prices[i+1]-prices[i]
+        return profit
