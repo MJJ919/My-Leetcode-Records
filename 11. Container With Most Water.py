@@ -1,4 +1,5 @@
 '''
+
 Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai). 
 n vertical lines are drawn such that the two endpoints of the line i is at (i, ai) and (i, 0). 
 Find two lines, which, together with the x-axis forms a container, such that the container contains the most water.
@@ -17,12 +18,12 @@ class Solution(object):
         :type height: List[int]
         :rtype: int
         """
-        mx, i,j = 0, 0, len(height)-1
-        while i<j:
-            a = min(height[i],height[j])
-            mx = max(mx, (j-i)*a)
-            if a==height[i]:
-                i = i+1
+        a, b = 0, len(height)-1
+        area = 0
+        while a<b:
+            area = max(area, min(height[a], height[b])*(b-a))
+            if height[a] < height[b]:
+                a += 1
             else:
-                j = j-1
-        return mx
+                b -= 1
+        return area
