@@ -16,9 +16,7 @@ Example 3:
 Input: nums = [0]
 Output: 0
 '''
-
 '''
-Method below uses dynamic programming.
 Time:O(n)
 Space:O(1)
 '''
@@ -28,9 +26,9 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        mx = nums[0]
-        for i in range(1,len(nums)):
-            if nums[i-1]>0:
-                nums[i] = nums[i]+nums[i-1]
-            mx = max(nums[i],mx)
-        return mx
+        n = len(nums)
+        cur = pro = nums[0]
+        for i in range(1,n):
+            cur = max(nums[i], cur + nums[i])
+            pro = max(pro, cur)
+        return pro
