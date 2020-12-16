@@ -8,9 +8,9 @@ You may assume that nums1 has enough space (size that is equal to m + n) to hold
 '''
 
 '''
-Method below is the best. Use 2 pointers and start from nums1's right side.
+Time:O(n)
+Space:O(1)
 '''
-
 class Solution(object):
     def merge(self, nums1, m, nums2, n):
         """
@@ -20,31 +20,22 @@ class Solution(object):
         :type n: int
         :rtype: None Do not return anything, modify nums1 in-place instead.
         """
-        p1 = m-1
-        p2 = n-1
-        p = m+n-1
-        while p1>=0 and p2>=0:
-            if nums1[p1]>nums2[p2]:
-                nums1[p]=nums1[p1]
-                p1 = p1-1
+        i, j, k = m-1, n-1, m+n-1
+        while i>=0 and j>=0:
+            if nums1[i]>=nums2[j]:
+                nums1[k] = nums1[i]
+                i, k = i-1, k-1
             else:
-                nums1[p]=nums2[p2]
-                p2 = p2-1
-            p = p-1
-        nums1[:p2+1] = nums2[:p2+1]
+                nums1[k] = nums2[j]
+                j,k = j-1, k-1
+        nums1[:j+1] = nums2[:j+1]
+        return nums1
             
 '''
-Method below is kind of dumb.
+Time:O(nlgn)
+Spaec:O(n)
 '''
-
 class Solution(object):
     def merge(self, nums1, m, nums2, n):
-        """
-        :type nums1: List[int]
-        :type m: int
-        :type nums2: List[int]
-        :type n: int
-        :rtype: None Do not return anything, modify nums1 in-place instead.
-        """
-        nums1[:]=sorted(nums1[:m]+nums2)
-        return nums1
+        nums1[m:] = nums2
+        return nums1.sort()
