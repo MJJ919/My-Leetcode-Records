@@ -32,7 +32,7 @@ class Solution(object):
                 return mid
             if nums[mid]>=nums[a]:
                 if target<nums[mid] and target>=nums[a]:
-                    b = mid -1
+                    b = mid-1
                 else:
                     a = mid+1
             else:
