@@ -1,4 +1,5 @@
 '''
+https://leetcode.com/problems/intersection-of-two-arrays-ii/
 Given two arrays, write a function to compute their intersection.
 
 Example 1:
@@ -12,7 +13,7 @@ Output: [4,9]
 
 '''
 Method below uses 2 pointers.
-Time:O(nlogn+mlogm)
+Time:O(nlogn)
 Space:O(1)
 '''
 class Solution(object):
@@ -33,7 +34,7 @@ class Solution(object):
 
 '''
 Method below uses hashmap.
-Time: O(n+m)
+Time: O(n)
 Space: O(min(n,m))
 '''
 class Solution(object):
@@ -53,7 +54,8 @@ class Solution(object):
         return res
         
 '''
-Medthod below uses hashtable and Collections.Counter function
+Time:O(n)
+Space:O(n)
 '''
 class Solution(object):
     def intersect(self, nums1, nums2):
