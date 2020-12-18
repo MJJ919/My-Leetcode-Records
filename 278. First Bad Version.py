@@ -1,4 +1,5 @@
 '''
+https://leetcode.com/problems/first-bad-version/
 You are a product manager and currently leading a team to develop a new product. 
 Unfortunately, the latest version of your product fails the quality check. 
 Since each version is developed based on the previous version, all the versions after a bad version are also bad.
@@ -10,7 +11,8 @@ Implement a function to find the first bad version. You should minimize the numb
 '''
 
 '''
-Method below uese binary search.
+Time:O(lgn)
+Space:O(1)
 '''
 # The isBadVersion API is already defined for you.
 # @param version, an integer
