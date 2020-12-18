@@ -1,4 +1,5 @@
 '''
+https://leetcode.com/problems/intersection-of-two-arrays/submissions/
 Given two arrays, write a function to compute their intersection.
 
 Example 1:
@@ -32,8 +33,8 @@ class Solution(object):
     
 '''
 Method below uses 2 pointers.
-O(M) Time
-O(1) Space
+Time:O(n)
+Space:O(1)
 '''
 class Solution(object):
     def intersection(self, nums1, nums2):
@@ -54,11 +55,10 @@ class Solution(object):
   
 '''
 Method below uses python build-in function &.
-O(M+N) Time(Ave)  O(M*N) Time(Worst)
-O(M+N) Space
+Time:O(M+N)  O(M*N) Time(Worst)
+space:O(M+N)
 '''
 class Solution(object):
     def intersection(self, nums1, nums2):
         nums1, nums2=set(sorted(nums1)), set(sorted(nums2))
         return (nums1 & nums2)
-                
