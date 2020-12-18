@@ -5,7 +5,6 @@ If not, return the index where it would be if it were inserted in order.
 '''
 
 '''
-Method below uses binary search.
 Time:O(logn)
 Space:O(1)
 '''
@@ -47,4 +46,3 @@ class Solution(object):
                     i += 1
                 elif target <= nums[i]:
                     return i
-                
