@@ -1,4 +1,5 @@
 '''
+https://leetcode.com/problems/first-unique-character-in-a-string/
 Given a string, find the first non-repeating character in it and return its index. If it doesn't exist, return -1.
 
 Examples:
@@ -20,13 +21,10 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        dict={}
+        d = defaultdict(int)
         for i in s:
-            if i not in dict:
-                dict[i]=1
-            else:
-                dict[i] = dict[i]+1  
-        for i, ch in enumerate(s):
-            if dict[ch]==1:
+            d[i] += 1
+        for i,ch in enumerate(s):
+            if d[ch]==1:
                 return i
         return -1
