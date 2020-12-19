@@ -1,11 +1,12 @@
 '''
+https://leetcode.com/problems/reverse-string/
 Write a function that reverses a string. The input string is given as an array of characters char[].
-
 Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
 '''
 
 '''
-Method below uses Reverse function.
+Time:O(n)
+Spaec:O(1)
 '''
 class Solution(object):
     def reverseString(self, s):
@@ -16,16 +17,12 @@ class Solution(object):
         s.reverse()
         
 '''
-Method below uses 2 pointers.
+Time:O(lgn)
+Space:O(1)
 '''
 class Solution(object):
     def reverseString(self, s):
-        """
-        :type s: List[str]
-        :rtype: None Do not return anything, modify s in-place instead.
-        """
-        i,j = 0, len(s)-1
-        while i<j:
-            s[i],s[j] = s[j],s[i]
-            i += 1
-            j -= 1
+        n = len(s)
+        for i in range(n/2):
+            s[i], s[n-i-1]=s[n-i-1],s[i]
+        return s
