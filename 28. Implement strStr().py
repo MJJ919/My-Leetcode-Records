@@ -5,7 +5,8 @@ Return the index of the first occurrence of needle in haystack, or -1 if needle 
 '''
 
 '''
-The following method is so pythonic.
+Time:O(n)
+Space:O(1)
 '''
 
 class Solution(object):
