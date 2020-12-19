@@ -1,5 +1,7 @@
 '''
-Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.
+https://leetcode.com/problems/ransom-note/
+Given an arbitrary ransom note string and another string containing letters from all the magazines, 
+write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false.
 
 Each letter in the magazine string can only be used once in your ransom note.
 
@@ -18,7 +20,7 @@ Output: true
 
 '''
 Method below uses hashtable.
-Time:O(m)
+Time:O(n)
 Space:O(1)
 '''
 class Solution(object):
@@ -28,19 +30,15 @@ class Solution(object):
         :type magazine: str
         :rtype: bool
         """
-        ransomNote, magazine = list(ransomNote), list(magazine)
-        dict = {}
+        d = defaultdict(int)
         for i in magazine:
-            if i not in dict:
-                dict[i] = 1
-            else:
-                dict[i] = dict[i]+1
+            d[i] += 1
         for i in ransomNote:
-            if i in dict and dict[i]!=0:
-                dict[i] = dict[i]-1
-            else:
+            if i not in d or d[i]==0:
                 return False
-        return True
+            else:
+                d[i] -= 1
+        return True                
         
 '''
 Time:O(m*n)
