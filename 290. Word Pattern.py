@@ -1,11 +1,12 @@
 '''
 Given a pattern and a string s, find if s follows the same pattern.
-
 Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty word in s.
 '''
 
 '''
 Method below uses 2 dicts.
+Time:O(n)
+Space:O(n)
 '''
 class Solution(object):
     def wordPattern(self, pattern, s):
@@ -31,15 +32,12 @@ class Solution(object):
         return True
 
 '''
-Method below uses set.
+Method below uses zip function.
+Time:O(n)
+Space:O(n)
 '''
 class Solution(object):
     def wordPattern(self, pattern, s):
-        """
-        :type pattern: str
-        :type s: str
-        :rtype: bool
-        """
         p = pattern
         s = s.split()
         return len(set(zip(s, p))) == len(set(s)) == len(set(p)) and len(s) == len(p)
