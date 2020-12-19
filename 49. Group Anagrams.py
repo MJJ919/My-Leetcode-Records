@@ -1,4 +1,5 @@
 '''
+https://leetcode.com/problems/group-anagrams/
 Given an array of strings strs, group the anagrams together. You can return the answer in any order.
 An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, 
 typically using all the original letters exactly once.
@@ -15,7 +16,21 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        dict = collections.defaultdict(list)
+        d = defaultdict(list)
         for i in strs:
-            dict[tuple(sorted(i))].append(i)
-        return dict.values()
+            d[tuple(sorted(i))].append(i)
+        return d.values()
+
+'''
+Time:O(NK)
+Space:O(NK)
+'''
+class Solution(object):
+    def groupAnagrams(self, strs):
+        d = defaultdict(list)
+        for i in strs:
+            count = [0]*26
+            for c in i:
+                count[ord(c)-ord('a')] += 1
+            d[tuple(count)].append(i)
+        return d.values()
