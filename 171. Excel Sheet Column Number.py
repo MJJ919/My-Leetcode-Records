@@ -1,10 +1,11 @@
 '''
+https://leetcode.com/problems/excel-sheet-column-number/
 Given a column title as appear in an Excel sheet, return its corresponding column number.
-
 '''
 
 '''
-Method below scans string from right to left.
+Time:O(n)
+Space:O(1)
 '''
 class Solution(object):
     def titleToNumber(self, s):
@@ -12,20 +13,14 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        a = 0
-        for i, ch in enumerate(s[::-1]):
-            a += (ord(ch)-64)*(26**i)
-        return a
+        res = 0
+        for i,ch in enumerate(s):
+            res += 26**(len(s)-i-1)*(ord(ch)-64)
+        return res
         
-'''
-Method below scans string from left to right.
-'''
+        
 class Solution(object):
     def titleToNumber(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
         a = 0
         for i, ch in enumerate(s):
             a = a*26+ord(ch)-64
