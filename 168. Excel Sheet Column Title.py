@@ -1,6 +1,6 @@
 '''
+https://leetcode.com/problems/excel-sheet-column-title/
 Given a positive integer, return its corresponding column title as appear in an Excel sheet.
-
 For example:
 
     1 -> A
@@ -17,9 +17,9 @@ class Solution(object):
         :type n: int
         :rtype: str
         """
-        output = []
-        while n>0:
-            output.append(chr((n-1)%26+65))
+        output = ""
+        rem = 0
+        while n > 0:
+            output += chr((n-1)%26 + 65)
             n = (n-1)//26
-        output.reverse()
-        return ''.join(output)
+        return output[::-1]
