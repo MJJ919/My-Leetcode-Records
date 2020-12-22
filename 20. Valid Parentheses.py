@@ -1,6 +1,5 @@
 '''
 https://leetcode.com/problems/valid-parentheses/description/
-
 Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 An input string is valid if:
 Open brackets must be closed by the same type of brackets.Open brackets must be closed in the correct order.
@@ -28,16 +27,13 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        mapping = {"}":"{", ")":"(", "]":"["}
+        d = {')':'(', ']':'[', '}':'{'}
         stack = []
-        if len(s)%2 == 1:
-            return False #if the len of s is odd then the result must be F
-        else:
-            for char in s:
-                if char in mapping.values():
-                    stack.append(char)
-                elif char in mapping:
-                        if stack == [] or mapping[char] != stack.pop():
-                            return False
-        return stack==[]
-                     
+        for i in s:
+            if i in d.values():
+                stack.append(i)
+            elif stack and d[i] == stack[-1]:
+                    del stack[-1]
+            else:
+                return False
+        return not stack
