@@ -1,4 +1,5 @@
 '''
+https://leetcode.com/problems/longest-substring-without-repeating-characters/submissions/
 Given a string s, find the length of the longest substring without repeating characters.
 
 Example 1:
@@ -29,12 +30,11 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        track = ''
-        num = 0
-        for i in s:
-            if i not in track:
-                track = track + i
-            else:
-                num = max(num, len(track))
-                track = track[track.index(i)+1:] + i
-        return max(num, len(track))
+        d = {}
+        i, res = 0, 0
+        for j in range(len(s)):
+            if s[j] in d:
+                i = max(d[s[j]],i)
+            res = max(res, j-i+1)
+            d[s[j]] = j+1
+        return res
