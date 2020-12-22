@@ -20,34 +20,29 @@ If the numerical value is out of the range of representable values, INT_MAX (231
 Time:O(n)
 Space:O(n)
 '''
-
 class Solution(object):
     def myAtoi(self, s):
         """
         :type s: str
         :rtype: int
         """
-        num = ''
-        str = str.lstrip(' ')#remove left spaces 
-        if (not str):
-            return 0
-        
-        if (str[0] == '-' or str[0] == '+'):
-            num = str[0]
-            str = str[1:]
-
-        for ch in str:
-            if (ch.isdigit()):
-                num += ch
-            else:
-                break
-        try: 
-            value = int(num)
-            if (value.bit_length() >= 32):#check overflow
-                return (2**31-1) if value > 0 else -2**31
-            return value
-        except ValueError:
-            return 0
+        s = s.lstrip(' ')
+        num, res = 0, '0'
+        if not s:   return 0
+        if s[0] in ['-', '+']:
+            res = s[0]
+            s = s[1:]
+        for i in s:
+            if i.isdigit():
+                res += i
+            else:   break
+        if len(res)>1: 
+            num = int(res)
+        if num > 2**31-1:
+            return 2**31-1
+        elif num < -2**31:
+            return -2**31
+        return num
 
 '''
 Method below uses regular expression.
