@@ -15,22 +15,17 @@ class Solution(object):
         :type digits: List[int]
         :rtype: List[int]
         """
-        n = len(digits)
-        # If the rightmost one is not 9
         if digits[-1] != 9:
             digits[-1] += 1
             return digits
-        # Change the numbers from the rightmost one
-        else: 
-            for i in range(n):
-                a = n-1-i
-                if digits[a] == 9:
-                    digits[a] = 0
-                else:
-                    digits[a] += 1
-                    return digits
-        # If all the numbers are 9
-            return [1]+digits
+        for i in range(len(digits)):
+            a = len(digits)-i-1
+            if digits[a] == 9:
+                digits[a] = 0
+            else:
+                digits[a] += 1
+                return digits
+        return [1]+digits
 
 class Solution(object):
     def plusOne(self, digits):
