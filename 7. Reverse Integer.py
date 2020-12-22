@@ -1,4 +1,5 @@
 '''
+https://leetcode.com/problems/reverse-integer/
 Given a 32-bit signed integer, reverse digits of an integer.
 
 Note:
@@ -6,7 +7,6 @@ Assume we are dealing with an environment that could only store integers within 
 For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
 '''
 '''
-Method below convert int into str first then convert str back to int.
 Time:O(x)
 Space:O(1)
 '''
@@ -36,12 +36,12 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
-        r = 0
-        a = 1
-        if x<0:
-            a = -1
+        if x<0: 
             x = -x
+            flag = -1
+        else:   flag = 1
+        res = 0
         while x>0:
-            r = r*10 + x%10
+            res = res*10 + x%10
             x = x//10
-        return 0 if r > pow(2,31) else r*a
+        return 0 if res>pow(2,31) else res*flag
