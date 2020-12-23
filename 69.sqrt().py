@@ -14,20 +14,19 @@ class Solution(object):
         if x<2:
             return x
         i,j = 0,x//2
-        while i<=j:
+        while i <= j:
             mid = (i+j)//2
-            if mid*mid>x:
-                j=mid-1
-            elif mid*mid<x:
+            if mid*mid > x:
+                j = mid-1
+            elif mid*mid < x:
                 i = mid+1
             else:
                 return mid
         return j
+    
 '''
 This way is pretty dumb.
 '''
-
-
 class Solution(object):
     def mySqrt(self, x):
         """
