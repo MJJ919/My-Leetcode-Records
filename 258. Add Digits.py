@@ -1,38 +1,33 @@
 '''
+https://leetcode.com/problems/add-digits/
 Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
 
 Example:
-
 Input: 38
 Output: 2 
 Explanation: The process is like: 3 + 8 = 11, 1 + 1 = 2. 
              Since 2 has only one digit, return it.
 '''
-
 '''
-Method below convert int to str.
+Math!
+Time:O(1)
+Space:O(1)
 '''
-
 class Solution(object):
     def addDigits(self, num):
         """
         :type num: int
         :rtype: int
         """
-        while num>9:
-            num = sum(int(c) for c in str(num))
-        return num
-        
+        if num == 0:    return 0
+        return 9 if num%9 == 0 else num%9
+
+'''
+Time:O(n)
+Space:O(1)
+'''
 class Solution(object):
     def addDigits(self, num):
-        """
-        :type num: int
-        :rtype: int
-        """
-        while num>9:
-            temp = 0
-            while num>0:
-                temp = temp + num%10
-                num = num//10
-            num = temp
+        while num >9:
+            num = num%10 + num//10
         return num
