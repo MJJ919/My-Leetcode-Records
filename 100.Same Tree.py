@@ -1,16 +1,14 @@
 '''
+https://leetcode.com/problems/same-tree/
 Given two binary trees, write a function to check if they are the same or not.
-
 Two binary trees are considered the same if they are structurally identical and the nodes have the same value.
 '''
-
-
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+'''
+Time:O(n)
+Space:  
+Best Case: Balanced Tree:   O(lg N)
+Worst Case: Completely Unbalanced Tree  O(N)
+'''
 class Solution(object):
     def isSameTree(self, p, q):
         """
