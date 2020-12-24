@@ -6,8 +6,8 @@ Input: root = [1,null,2,3]
 Output: [1,2,3]
 '''
 '''
-Time:
-Space:
+Time:O(n)
+Space:O(n)
 '''
 # Definition for a binary tree node.
 # class TreeNode(object):
