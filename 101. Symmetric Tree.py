@@ -1,6 +1,6 @@
 '''
+https://leetcode.com/problems/symmetric-tree/
 Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
-
 For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
 
     1
@@ -8,7 +8,6 @@ For example, this binary tree [1,2,2,3,4,4,3] is symmetric:
   2   2
  / \ / \
 3  4 4  3
- 
 
 But the following [1,2,2,null,3,null,3] is not:
 
@@ -18,13 +17,10 @@ But the following [1,2,2,null,3,null,3] is not:
    \   \
    3    3
 '''
-
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+'''
+Time:O(n)
+Space:O(n)
+'''
 class Solution(object):
     def isSymmetric(self, root):
         """
