@@ -14,18 +14,10 @@ Given the below binary tree and sum = 22,
 7    2      1
 return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 '''
-
 '''
 Time:O(N)
-Space:O(N)-O(logN)
+Space:O(N)~O(logN)
 '''
-
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution(object):
     def hasPathSum(self, root, sum):
         """
@@ -35,7 +27,6 @@ class Solution(object):
         """
         if not root:
             return False
-        
         sum -= root.val
         if not root.left and not root.right:
             return sum == 0
