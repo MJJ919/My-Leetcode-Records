@@ -1,13 +1,11 @@
 '''
+https://leetcode.com/problems/invert-binary-tree/
 Invert a binary tree.
 '''
-
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+'''
+Time:O(n)
+Space:O(n)
+'''
 class Solution(object):
     def invertTree(self, root):
         """
@@ -16,4 +14,13 @@ class Solution(object):
         """
         if root:
             root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)        
+        return root
+    
+class Solution(object):
+    def invertTree(self, root):
+        if not root:
+            return None
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        root.left, root.right = root.right, root.left
         return root
