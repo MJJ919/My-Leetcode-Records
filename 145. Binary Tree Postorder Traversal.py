@@ -6,15 +6,11 @@ Example 1:
 Input: root = [1,null,2,3]
 Output: [3,2,1]
 '''
+'''
+Recursion
 Time:O(n)
 Space:O(n)
 '''
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution(object):
     def postorderTraversal(self, root):
         """
@@ -30,3 +26,20 @@ class Solution(object):
             self.rec(node.left, res)
             self.rec(node.right,res)
             res.append(node.val)
+'''
+Iteration
+Time:O(n)
+Space:O(n)
+'''
+class Solution(object):
+    def postorderTraversal(self, root):
+        res, s = [],[]
+        while True:
+            while root:
+                res.append(root.val)
+                s.append(root)
+                root = root.right
+            if not s:
+                return res[::-1]
+            node = s.pop()
+            root = node.left
