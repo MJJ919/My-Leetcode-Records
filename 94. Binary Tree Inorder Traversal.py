@@ -7,15 +7,10 @@ Input: root = [1,null,2,3]
 Output: [1,3,2]
 '''
 '''
+Recursion
 Time:O(n)
 Space:O(n)
 '''
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
 class Solution(object):
     def inorderTraversal(self, root):
         """
@@ -31,3 +26,21 @@ class Solution(object):
             self.rec(node.left, res)
             res.append(node.val)
             self.rec(node.right, res)
+            
+'''
+Iteration
+Time:O(n)
+Space:O(n)
+'''
+class Solution(object):
+    def inorderTraversal(self, root):
+        res, s = [],[]
+        while True:
+            while root:
+                s.append(root)
+                root = root.left
+            if not s:
+                return res
+            node = s.pop()
+            res.append(node.val)
+            root = node.right
