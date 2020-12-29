@@ -19,11 +19,29 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        cur=head
-        while cur != None and cur.next!=None:
-            if cur.val == cur.next.val:
-                cur.next=cur.next.next
+        if head == None:    
+            return head
+        p = head
+        while p.next != None:
+            if p.val == p.next.val:
+                p.next = p.next.next
             else:
-                cur = cur.next
+                p = p.next
         return head
-                
+'''
+Time:O(n)
+Space:O(n)
+'''
+class Solution(object):
+    def deleteDuplicates(self, head):
+        l = []
+        dummy = ListNode(-1)
+        dummy.next = head
+        while head:
+            if head.val not in l:
+                l.append(head.val)
+                pre = head
+            else:
+                pre.next = head.next
+            head = head.next
+        return dummy.next
