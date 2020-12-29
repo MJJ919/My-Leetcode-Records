@@ -19,27 +19,15 @@ Output: [0]
 Time: O(n+m)
 Space: O(1)
 '''
-# Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
-class Solution(object):
-    def mergeTwoLists(self, l1, l2):
-        """
-        :type l1: ListNode
-        :type l2: ListNode
-        :rtype: ListNode
-        """
-        dummy = ListNode(float('-inf'))
-        pre = dummy
+l = ListNode(0)
+        p = l
         while l1 and l2:
-            if l1.val>l2.val:
-                pre.next = l2
-                l2 = l2.next 
+            if l1.val < l2.val:
+                l.next = l1
+                l1 = l1.next
             else:
-                pre.next = l1
-                l1 = l1.next 
-            pre = pre.next
-        pre.next = l1 if l1 is not None else l2
-        return dummy.next
+                l.next = l2
+                l2 = l2.next
+            l = l.next
+        l.next = l1 if l1 != None else l2
+        return p.next
