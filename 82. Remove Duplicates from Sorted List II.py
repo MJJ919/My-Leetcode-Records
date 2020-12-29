@@ -15,11 +15,6 @@ Output: 2->3
 Time:O(n)
 Space:O(1)
 '''
-# Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution(object):
     def deleteDuplicates(self, head):
         """
@@ -28,15 +23,14 @@ class Solution(object):
         """
         dummy = ListNode(0)
         dummy.next = head
-        pre=dummy
-        while head and head.next:
-            if head.next.val==head.val:
-                while head and head.next and head.next.val==head.val:
-                    head = head.next
-                head = head.next
-                pre.next = head
+        pre, cur = dummy, head
+        d = []
+        while cur:
+            if cur.next and cur.val == cur.next.val:
+                while cur.next and cur.val == cur.next.val:
+                    cur = cur.next
+                pre.next = cur.next
             else:
-                head=head.next
-                pre=pre.next
+                pre = pre.next
+            cur = cur.next
         return dummy.next
-                
