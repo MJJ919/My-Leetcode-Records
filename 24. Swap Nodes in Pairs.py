@@ -20,21 +20,31 @@ Output: [1]
 Time: O(n)
 Space: O(1)
 '''
-
-# Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution(object):
     def swapPairs(self, head):
         """
         :type head: ListNode
         :rtype: ListNode
-        d, d.next = self, head
-        while d.next and d.next.next:
-            a = d.next
-            b = a.next
-            d.next,b.next, a.next = b, a, b.next
-            d = a
-        return self.next
+        """
+        dummy = ListNode(-1)
+        dummy.next = head
+        pre = dummy
+        while head and head.next:
+            first, second = head, head.next
+            pre.next, second.next, first.next = second, first, second.next
+            pre = first
+            head = first.next
+        return dummy.next
+    
+'''
+Time:O(n)
+Space:O(1)
+'''
+class Solution(object):
+    def swapPairs(self, head):
+        if not head or not head.next:   return head
+        first, second = head, head.next 
+        first.next = self.swapPairs(second.next)
+        second.next = first
+        
+        return second
