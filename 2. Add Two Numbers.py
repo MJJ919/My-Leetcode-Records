@@ -1,4 +1,5 @@
 '''
+https://leetcode.com/problems/add-two-numbers/
 You are given two non-empty linked lists representing two non-negative integers. 
 The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
 
@@ -17,18 +18,11 @@ Example 3:
 Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
 Output: [8,9,9,9,0,0,0,1]
 '''
-
 '''
 Method below uses dummy head and a variable:carry as the number at the tenth digit. 
 Time:O(max(m,n))
 Space:O(max(m,n))
 '''
-
-# Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution(object):
     def addTwoNumbers(self, l1, l2):
         """
@@ -36,17 +30,15 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
-        r = ListNode(0)
-        t = r
         carry = 0
+        res = ListNode(0)
+        tail = res
         while l1 or l2 or carry:
-            val1=(l1.val if l1 else 0)
-            val2=(l2.val if l2 else 0)
-            carry, out=divmod(val1+val2+carry,10)
-            
-            t.next=ListNode(out)
-            t=t.next
-            
-            l1=(l1.next if l1 else None)
-            l2=(l2.next if l2 else None)
-        return r.next
+            n1 = l1.val if l1 else 0
+            n2 = l2.val if l2 else 0
+            carry, out = divmod(n1+n2+carry, 10)
+            tail.next = ListNode(out)
+            tail = tail.next
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        return res.next
