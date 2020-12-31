@@ -22,12 +22,6 @@ Method below uses one pass.
 Time:O(n)
 Space:O(1)
 '''
-
-# Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, val=0, next=None):
-#         self.val = val
-#         self.next = next
 class Solution(object):
     def removeNthFromEnd(self, head, n):
         """
@@ -35,15 +29,29 @@ class Solution(object):
         :type n: int
         :rtype: ListNode
         """
+        i = 0 
+        dummy = first = ListNode(0)
+        dummy.next = head
+        while head:
+            head = head.next
+            i += 1
+        for i in range(i-n):
+            first = first.next
+        first.next = first.next.next
+        return dummy.next
+    
+'''
+Time:O(n)
+Space:O(1)
+'''
+class Solution(object):
+    def removeNthFromEnd(self, head, n):
         dummy = ListNode(0)
         dummy.next = head
-        i = 0
         fir = sec = dummy
-        while i<n+1:
+        for i in range(n+1):
             fir = fir.next
-            i = i+1
         while fir:
-            fir = fir.next
-            sec = sec.next
+            fir, sec = fir.next, sec.next
         sec.next = sec.next.next
         return dummy.next
