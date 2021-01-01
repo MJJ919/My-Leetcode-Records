@@ -19,7 +19,6 @@ Example 3:
 Input: nums = [0], target = 0
 Output: 0
 '''
-
 '''
 Method below uses 2 pointers.
 Time:O(n**2)
@@ -32,16 +31,14 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        sum = 0
-        if len(nums)<3:
-            return sum
-        nums = sorted(nums)
-        for i, ch in enumerate(nums):
-            a,b = i+1, len(nums)-1
-            while a<b:
-                if ch+nums[a]+nums[b]<target:
-                    sum = sum+(b-a)
-                    a = a+1
+        nums.sort()
+        res = 0
+        for n in range(len(nums)):
+            i, j = n+1, len(nums)-1
+            while i<j:
+                if nums[i]+nums[j]+nums[n] >= target:
+                    j -= 1
                 else:
-                    b = b-1
-        return sum
+                    res += j-i
+                    i += 1
+        return res
