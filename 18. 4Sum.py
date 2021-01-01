@@ -11,12 +11,10 @@ Example 2:
 Input: nums = [], target = 0
 Output: []
 '''
-
 '''
 Time:O(n**3)
 Space:O(1)
 '''
-
 class Solution(object):
     def fourSum(self, nums, target):
         """
@@ -24,23 +22,21 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
-        output=[]
-        result=[]
-        nums=sorted(nums)
-        if len(nums)<4:
-            return output
+        out, res = [], []
+        nums.sort()
         for i in range(len(nums)-3):
-            for j in range(i+1, len(nums)-2):
-                p1,p2 = j+1,len(nums)-1
-                while p1<p2:
-                    if nums[p1]+nums[p2]<target - nums[i] - nums[j]:
-                        p1 = p1+1
-                    elif nums[p1]+nums[p2]>target - nums[i] - nums[j]:
-                        p2 = p2-1
-                    else:
-                        output.append([nums[i], nums[j], nums[p1], nums[p2]])
-                        p2 = p2-1
-        for i in output:
-            if i not in result:
-                result.append(i)
-        return result
+            for j in range(i+1,len(nums)-2):
+                s = target-nums[i]-nums[j]
+                m, n = j+1, len(nums)-1
+                while m<n:
+                    if nums[m]+nums[n]<s:
+                        m += 1
+                    elif nums[m]+nums[n]>s:
+                        n -= 1
+                    elif nums[m]+nums[n]==s:
+                        out.append([nums[i],nums[j],nums[m],nums[n]])
+                        m += 1
+        for i in out:
+            if i not in res:
+                res.append(i)
+        return res
