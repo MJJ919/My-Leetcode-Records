@@ -25,7 +25,6 @@ Input: path = "/a/./b/../../c/"
 Output: "/c"
 '''
 '''
-Method below uses stack.
 Time:O(n)
 Space:O(n)
 '''
