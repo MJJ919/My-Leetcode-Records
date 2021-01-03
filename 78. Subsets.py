@@ -1,4 +1,5 @@
 '''
+https://leetcode.com/problems/subsets/
 Given an integer array nums, return all possible subsets (the power set).
 The solution set must not contain duplicate subsets. 
 
@@ -10,9 +11,8 @@ Example 2:
 Input: nums = [0]
 Output: [[],[0]]
 '''
-
 '''
-Method below uses cascading.
+Cascading.
 Time:O(n*2^n)
 Space:O(n*2^n)
 '''
@@ -28,15 +28,21 @@ class Solution(object):
         return output
 
 '''
-method below uses bitmap.
+Backtracking.
 Time:O(n*2^n)
 Space:O(n*2^n)
 '''
 class Solution(object):
     def subsets(self, nums):
-        output = []
+        def back(start, cur):
+            res.append(cur[:])
+            
+            for j in range(start, n):
+                cur.append(nums[j])
+                back(j+1,cur)
+                cur.pop()
+                
+        res = []
         n = len(nums)
-        for i in range(2**n,2**(n+1)):
-            bit = bin(i)[3:]
-            output.append([nums[j] for j in range(n) if bit[j]=='1'])
-        return output
+        back(0,[])
+        return res
