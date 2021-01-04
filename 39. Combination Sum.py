@@ -16,25 +16,22 @@ Time:
 Space:
 '''
 class Solution(object):
-    def combinationSum2(self, candidates, target):
+    def combinationSum(self, candidates, target):
         """
         :type candidates: List[int]
         :type target: int
         :rtype: List[List[int]]
         """
-        def back(start,cur):
-            n = sum(cur)
-            if n==target and cur not in res:
+        def back(target, start,cur):
+            if target==0:
                 res.append(cur[:])
                 return
-            else:
-                if n>target:
-                    return
+            elif target<0:
+                return
             for i in range(start, length):
                 cur.append(candidates[i])
-                back(i+1,cur)
+                back(target-candidates[i], i, cur)
                 cur.pop()
-        candidates.sort()
         res, length = [], len(candidates)
-        back(0, [])
+        back(target, 0, [])
         return res
