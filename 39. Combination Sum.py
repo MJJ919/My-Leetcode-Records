@@ -12,25 +12,29 @@ It is guaranteed that the number of unique combinations that sum up to target is
 '''
 
 '''
-Method below uses backtracking.
+Time:
+Space:
 '''
 class Solution(object):
-    def combinationSum(self, candidates, target):
+    def combinationSum2(self, candidates, target):
         """
         :type candidates: List[int]
         :type target: int
         :rtype: List[List[int]]
         """
-        result=[]
-        def sum(start,comb,remain):
-            if remain == 0:
-                result.append(list(comb))
-            elif remain<0:
+        def back(start,cur):
+            n = sum(cur)
+            if n==target and cur not in res:
+                res.append(cur[:])
                 return
-            
-            for i in range(start,len(candidates)):
-                comb.append(candidates[i])
-                sum(i,comb,remain-candidates[i])
-                comb.pop()
-        sum(0,[],target)      
-        return result
+            else:
+                if n>target:
+                    return
+            for i in range(start, length):
+                cur.append(candidates[i])
+                back(i+1,cur)
+                cur.pop()
+        candidates.sort()
+        res, length = [], len(candidates)
+        back(0, [])
+        return res
