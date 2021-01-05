@@ -7,10 +7,22 @@ Input: [1,2,3]
 Output:
 [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 '''
-
 '''
-Method below uses backtracking.
+backtracking.
 '''
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def back(cur):
+            if len(cur)==n:
+                res.append(cur[:])
+            for i in nums:
+                if i not in cur:
+                    cur.append(i)
+                    back(cur)
+                    cur.pop()
+        res, n = [], len(nums)
+        back([])
+        return res
 
 class Solution(object):
     def permute(self, nums):
@@ -29,4 +41,3 @@ class Solution(object):
         n = len(nums)
         back()
         return output
-        
