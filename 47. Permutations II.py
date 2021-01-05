@@ -7,29 +7,22 @@ Example 2:
 Input: nums = [1,2,3]
 Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 '''
-
 '''
-Method below uses backtracking.
+backtracking.
 '''
-class Solution(object):
-    def permuteUnique(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        result=[]
-        def backtrack(comb,counter):
-            if len(comb) == len(nums):
-                result.append(list(comb))
-                return 
-            for num in counter:
-                if counter[num]>0:
-                    comb.append(num)
-                    counter[num] -= 1
-                    backtrack(comb,counter)
-                    comb.pop()
-                    counter[num] += 1
-        
-        backtrack([],Counter(nums))
-        
-        return result
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        def back(counter,cur):
+            if len(cur)==n:
+                res.append(cur[:])
+                return
+            for i in counter:
+                if counter[i]>0:
+                    cur.append(i)
+                    counter[i] -= 1
+                    back(counter, cur)
+                    cur.pop()
+                    counter[i] += 1
+        res, n = [], len(nums)
+        back(Counter(nums),[])
+        return res
