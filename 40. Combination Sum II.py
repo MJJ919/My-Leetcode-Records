@@ -20,30 +20,28 @@ Constraints:
 1 <= candidates[i] <= 50
 1 <= target <= 30
 '''
-
 '''
 Time:O()
 Space:O()
-class Solution(object):
-    def combinationSum2(self, candidates, target):
-        """
-        :type candidates: List[int]
-        :type target: int
-        :rtype: List[List[int]]
-        """
-        candidates.sort()
-        result=[]
-        self.sum(candidates,0,[],result,target)
-        return result
-    
-    def sum(self,nums,start,path,result,target):
-        if not target:                 
-            result.append(path)
-        for i in xrange (start,len(nums)):
-            if nums[i]>target:
-                break   #Solution doesn't find. Break.
-            if i> start and nums[i] == nums[i-1]:
-                continue    #Avoid Duplicate.
-            else:    
-                self.sum(nums, i+1, path+[nums[i]], result, target-nums[i])
-       
+'''
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        def back(target, first, counter, cur):
+            if target == 0:
+                res.append(cur[:])
+                return
+            elif target < 0:
+                return 
+            for i in range(first, len(counter)):
+                num, freq = counter[i]
+                if freq > 0:
+                    cur.append(num)
+                    counter[i] = (num, freq-1)
+                    back(target-num, i, counter, cur)
+                    cur.pop()
+                    counter[i] = (num, freq)
+        res = []
+        counter = Counter(candidates)
+        counter = [(c, counter[c]) for c in counter]
+        back(target, 0, counter, [])
+        return res
