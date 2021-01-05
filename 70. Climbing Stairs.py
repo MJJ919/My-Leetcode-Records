@@ -18,13 +18,11 @@ Explanation: There are three ways to climb to the top.
 2. 1 step + 2 steps
 3. 2 steps + 1 step
 '''
-
 '''
 Method below uses Fibonacci.
 Time:O(n)
 Space:O(1)
 '''
-
 class Solution(object):
     def climbStairs(self, n):
         """
@@ -38,3 +36,17 @@ class Solution(object):
             a = b
             b = c
         return b
+
+'''
+Time:O(n)
+Space:O(n)
+'''
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n == 1:  return 1
+        res = [0]
+        res.append(1)
+        res.append(2)
+        for i in range(3, n+1):
+            res.append(res[i-1]+res[i-2])
+        return res[n]
