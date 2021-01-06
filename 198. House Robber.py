@@ -24,7 +24,7 @@ class Solution(object):
 
 '''
 Time:O(n)
-Space:O(1)
+Space:O(n)
 '''
 class Solution(object):
     def rob(self, nums):
