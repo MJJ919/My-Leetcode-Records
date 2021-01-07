@@ -1,8 +1,17 @@
 '''
+https://leetcode.com/problems/single-number/
 Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
-'''
+Follow up: Could you implement a solution with a linear runtime complexity and without using extra memory?
 
-# ^XOR stands for exclusively or
+Example 1:
+Input: nums = [2,2,1]
+Output: 1
+'''
+'''
+Bit manipulation.
+Time:O(n)
+Space:O(1)
+'''
 class Solution(object):
     def singleNumber(self, nums):
         """
@@ -13,22 +22,11 @@ class Solution(object):
         for i in nums:
             a ^= i
         return a
-        
-class Solution(object):
-    def singleNumber(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        nums1 = []
-        for i in nums:
-            if i not in nums1:
-                nums1.append(i)
-            else:
-                nums1.remove(i)
-        return nums1[0]
-  
 
+'''
+Time:
+Space:
+'''
 class Solution(object):
     def singleNumber(self, nums):
         """
@@ -36,4 +34,3 @@ class Solution(object):
         :rtype: int
         """
         return 2 * sum(set(nums)) - sum(nums)
-        
