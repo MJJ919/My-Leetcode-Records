@@ -11,11 +11,9 @@ Example 2:
 Input: grid = [[1,2,3],[4,5,6]]
 Output: 12
 '''
-
 '''
-Method below uses inplace dynamic programming.
 Time:O(M*N)
-Space:O(1)Since no extra space needed.
+Space:O(1)
 '''
 class Solution(object):
     def minPathSum(self, grid):
