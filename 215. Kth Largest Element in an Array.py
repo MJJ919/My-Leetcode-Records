@@ -12,9 +12,9 @@ Output: 4
 
 '''
 '''
-Time:O(nlgn)
-Space:O(1)
+Time:O(nlgk)
+Space:O(k)
 '''
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        return sorted(nums)[::-1][k-1]
+        return heapq.nlargest(k, nums)[-1]
