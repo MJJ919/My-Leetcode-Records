@@ -28,3 +28,12 @@ class Solution:
                     seen.add((num, j))
                     seen.add((i//3, j//3, num))
         return True
+
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        seen = []
+        for i, row in enumerate(board):
+            for j, ch in enumerate(row):
+                if ch!='.':
+                    seen+=[(i, ch), (ch, j), (i//3, j//3, ch)]
+        return len(seen)==len(set(seen))
