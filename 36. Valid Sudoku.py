@@ -16,26 +16,15 @@ Method below uses rows, columns and boxs to store numbers in each row, column an
 Time:O(1)  Because the size of sudoku is fixed.
 Space:O(1)
 '''
-
-class Solution(object):
-    def isValidSudoku(self, board):
-        """
-        :type board: List[List[str]]
-        :rtype: bool
-        """
-        rows=[{}for i in range(9)]
-        columns=[{}for i in range(9)]
-        box=[{}for i in range(9)]
-        
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        seen = set()
         for i in range(9):
             for j in range(9):
-                num = board[i][j]
-                if num != '.':
-                    num = int(num)
-                    box_index = (i//3)*3+j//3
-                    rows[i][num]=rows[i].get(num,0)+1
-                    columns[j][num]=columns[j].get(num,0)+1
-                    box[box_index][num]=box[box_index].get(num,0)+1
-                    if rows[i][num]>1 or columns[j][num]>1 or box[box_index][num]>1:
-                        return False
+                if board[i][j]!= '.':
+                    num = board[i][j]
+                    if (i, num) in seen or (num, j) in seen or (i//3, j//3, num) in seen: return False   
+                    seen.add((i, num))
+                    seen.add((num, j))
+                    seen.add((i//3, j//3, num))
         return True
