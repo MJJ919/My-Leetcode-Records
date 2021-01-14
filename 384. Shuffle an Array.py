@@ -15,23 +15,21 @@ Space:O(n)
 class Solution:
 
     def __init__(self, nums: List[int]):
+        self.nums = nums[:]
         self.array = nums
-        self.original = list(nums)
 
     def reset(self) -> List[int]:
         """
         Resets the array to its original configuration and return it.
         """
-        self.array = self.original
-        self.original = list(self.original)
-        return self.array
+        return self.nums
 
     def shuffle(self) -> List[int]:
         """
         Returns a random shuffling of the array.
         """
-        aux = list(self.array)
-        for i in range (len(self.array)):
-            idx = random.randrange(len(aux))
+        aux = self.array[:]
+        for i in range(len(self.array)):
+            idx = random.randint(0, len(aux)-1)
             self.array[i] = aux.pop(idx)
         return self.array
