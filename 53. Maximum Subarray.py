@@ -20,15 +20,11 @@ Output: 0
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def maxSubArray(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        n = len(nums)
-        cur = pro = nums[0]
-        for i in range(1,n):
-            cur = max(nums[i], cur + nums[i])
-            pro = max(pro, cur)
-        return pro
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        s = 0
+        for i in range(len(nums)):
+            if s+nums[i]>nums[i]:
+                nums[i] = s+nums[i]
+            s = nums[i]
+        return max(nums)
