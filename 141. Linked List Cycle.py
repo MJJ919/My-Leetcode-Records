@@ -29,13 +29,12 @@ class Solution(object):
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def hasCycle(self, head):
-        d = {}
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        d = set()
         while head:
             if head in d:
                 return True
-            else:
-                d[head] = True
+            d.add(head)
             head = head.next
         return False
