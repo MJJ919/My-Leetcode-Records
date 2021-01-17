@@ -20,15 +20,13 @@ Output: [1,1]
 Time:O(n**2)
 Space:O(n)
 '''
-class Solution(object):
-    def getRow(self, rowIndex):
-        """
-        :type rowIndex: int
-        :rtype: List[int]
-        """
-        row = [1]
-        for i in range(rowIndex):
-            for j in range(i,0,-1):
-                row[j]=row[j]+row[j-1]
-            row.append(1)
-        return row
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        pre = [1]
+        cur = []
+        for i in range(1,rowIndex+1):
+            cur = [1 for _ in range(i+1)]
+            for j in range(1,i):
+                cur[j] = pre[j-1]+pre[j]
+            pre = cur
+        return pre
