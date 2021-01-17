@@ -18,17 +18,11 @@ Output:
 Time:O(n**2)
 Space:O(n**2)
 '''
-class Solution(object):
-    def generate(self, numRows):
-        """
-        :type numRows: int
-        :rtype: List[List[int]]
-        """
-        a = [[] for x in xrange(numRows)]
-        for i in range(numRows):
-            for n in range(i+1):
-                if n == 0 or n == i:
-                    a[i].append(1)
-                else:
-                    a[i].append(a[i-1][n-1]+a[i-1][n])
-        return a
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        res = [[1]for _ in range(numRows)]
+        for i in range(1,numRows):
+            for j in range(1,i):
+                res[i].append(res[i-1][j-1]+res[i-1][j])
+            res[i].append(1)
+        return res
