@@ -41,7 +41,6 @@ class Solution(object):
 '''
 Method below doesn't use pointers
 '''
-
 class Solution(object):
     def removeElement(self, nums, val):
         """
