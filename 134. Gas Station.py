@@ -23,8 +23,8 @@ cost = [3,4,3]
 Output: -1
 '''
 '''
-Time:
-Space:
+Time:O(n)
+Space:O91)
 '''
 class Solution(object):
     def canCompleteCircuit(self, gas, cost):
