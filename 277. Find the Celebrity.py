@@ -65,4 +65,3 @@ class Solution(object):
             if not knows(j,i) or knows(i,j):
                 return False
         return True
-                
