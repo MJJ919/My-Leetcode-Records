@@ -8,27 +8,27 @@ The number of "bulls", which are digits in the guess that are in the correct pos
 The number of "cows", which are digits in the guess that are in your secret number but are located in the wrong position. 
 Specifically, the non-bull digits in the guess that could be rearranged such that they become bulls.
 Given the secret number secret and your friend's guess guess, return the hint for your friend's guess.
-The hint should be formatted as "xAyB", where x is the number of bulls and y is the number of cows. Note that both secret and guess may contain duplicate digits.
+The hint should be formatted as "xAyB", where x is the number of bulls and y is the number of cows. 
+Note that both secret and guess may contain duplicate digits.
 '''
 '''
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def getHint(self, secret, guess):
-        """
-        :type secret: str
-        :type guess: str
-        :rtype: str
-        """
-        a = collections.Counter(secret)
-        cow, bull=0,0
-        for i,ch in enumerate(guess):
-            if ch in a:
-                if ch == secret[i]:
-                    bull += 1
-                    cow -= int(a[ch]<=0)
-                else:
-                    cow += int(a[ch]>0)
-            a[ch] -= 1
-        return "{}A{}B".format(bull,cow)
+class Solution:
+    def getHint(self, secret: str, guess: str) -> str:
+        a, b = 0, 0
+        ds = defaultdict(int)
+        dg = defaultdict(int)
+        for i in secret:
+            ds[i] += 1
+        for i in guess:
+            dg[i] += 1
+        for j in ds:
+            if j in dg:
+                b += min(ds[j], dg[j])
+        for i in range(len(secret)):
+            if secret[i]==guess[i]:
+                a += 1
+                b -= 1
+        return str(a)+'A'+str(b)+'B'
