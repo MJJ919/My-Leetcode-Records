@@ -14,34 +14,17 @@ Output: 1
 Time:O(n)
 Space:O(n)
 '''
-class WordDistance(object):
+class WordDistance:
 
-    def __init__(self, words):
-        """
-        :type words: List[str]
-        """
+    def __init__(self, words: List[str]):
         self.d = defaultdict(list)
-        for i,ch in enumerate(words):
+        for i, ch in enumerate(words):
             self.d[ch].append(i)
-
-    def shortest(self, word1, word2):
-        """
-        :type word1: str
-        :type word2: str
-        :rtype: int
-        """
-        l1,l2 = self.d[word1], self.d[word2]
-        i,j = 0, 0
-        dis = float("inf")
-        while i<len(l1) and j<len(l2):
-            dis = min(dis, abs(l1[i]-l2[j]))
-            if l1[i]<l2[j]:
-                i += 1
-            else: 
-                j += 1
-        return dis
-            
-
-# Your WordDistance object will be instantiated and called as such:
-# obj = WordDistance(words)
-# param_1 = obj.shortest(word1,word2)
+        
+    def shortest(self, word1: str, word2: str) -> int:
+        l1, l2 = self.d[word1], self.d[word2]
+        res = float('inf')
+        for i in l1:
+            for j in l2:
+                res = min(res, abs(i-j))
+        return res
