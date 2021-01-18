@@ -5,7 +5,6 @@ word1 and word2 may be the same and they represent two individual words in the l
 
 Example:
 Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
-
 Input: word1 = “makes”, word2 = “coding”
 Output: 1
 Input: word1 = "makes", word2 = "makes"
