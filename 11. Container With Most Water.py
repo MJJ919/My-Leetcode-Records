@@ -6,7 +6,6 @@ Find two lines, which, together with the x-axis forms a container, such that the
 
 Notice that you may not slant the container.
 '''
-
 '''
 Method below uses 2 pointers.
 Time:O(n)
