@@ -48,3 +48,13 @@ class Solution(object):
             if ch>=len(citations)-i:
                 return len(citations)-i
         return 0
+
+class Solution:
+    def hIndex(self, citations: List[int]) -> int:
+        citations.sort()
+        i = 0
+        while i<len(citations):
+            if citations[len(citations)-i-1]>i:
+                i += 1
+            else:   break
+        return i
