@@ -39,10 +39,6 @@ Space:O(1)
 '''
 class Solution(object):
     def hIndex(self, citations):
-        """
-        :type citations: List[int]
-        :rtype: int
-        """
         citations.sort()
         for i,ch in enumerate(citations):
             if ch>=len(citations)-i:
