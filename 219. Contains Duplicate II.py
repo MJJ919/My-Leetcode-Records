@@ -5,7 +5,6 @@ find out whether there are two distinct indices i and j
 in the array such that nums[i] = nums[j] and 
 the absolute difference between i and j is at most k.
 '''
-
 '''
 Time:O(n)
 Space:O(n)
@@ -24,4 +23,3 @@ class Solution(object):
                 return True
             dict[ch] = i
         return False
-  
