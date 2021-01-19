@@ -33,3 +33,18 @@ class Solution:
         for i in range(len(prices)):
             res = max(res, p1[i]+p2[i])
         return res
+
+'''
+Time:O(n)
+Space:O(1)
+'''
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        cost1, cost2 = float('inf'), float('inf')
+        sold1, sold2 = 0, 0
+        for p in prices:
+            cost1 = min(cost1, p)
+            sold1 = max(sold1, p-cost1)
+            cost2 = min(cost2, p-sold1)
+            sold2 = max(sold2, p-cost2)
+        return sold2
