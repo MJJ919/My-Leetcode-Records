@@ -20,18 +20,14 @@ Output: false
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def increasingTriplet(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: bool
-        """
-        a, b = float('inf'), float('inf')
+class Solution:
+    def increasingTriplet(self, nums: List[int]) -> bool:
+        first = second = float('inf')
         for i in nums:
-            if i <= a:
-                a = i
-            elif i <= b:
-                b = i
+            if i<=first:
+                first = i
+            elif i<=second:
+                second = i
             else:
                 return True
         return False
