@@ -11,46 +11,28 @@ Example 2:
 Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
 Output: [[1,2],[3,10],[12,16]]
 Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
-
-Example 3:
-Input: intervals = [], newInterval = [5,7]
-Output: [[5,7]]
-
-Example 4:
-Input: intervals = [[1,5]], newInterval = [2,3]
-Output: [[1,5]]
-
-Example 5:
-Input: intervals = [[1,5]], newInterval = [2,7]
-Output: [[1,7]]
 '''
 '''
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def insert(self, intervals, newInterval):
-        """
-        :type intervals: List[List[int]]
-        :type newInterval: List[int]
-        :rtype: List[List[int]]
-        """
-        ns, ne = newInterval
-        i, n = 0, len(intervals)
-        output = []
-        while i<n and ns>intervals[i][0]:
-            output.append(intervals[i])
-            i += 1
-        if not output or output[-1][1]<ns:
-            output.append(newInterval)
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        start, end = newInterval
+        idx, n = 0, len(intervals)
+        res = []
+        while idx<n and start>intervals[idx][0]:
+            res.append(intervals[idx])
+            idx += 1
+        if not res or res[-1][1]<start:
+            res.append(newInterval)
         else:
-            output[-1][1]=max(ne,output[-1][1])
-            
-        while i<n:
-            s, e = intervals[i]
-            if s>output[-1][1]:
-                output.append(intervals[i])
-            elif s<=output[-1][1]:
-                output[-1][1] = max(e,output[-1][1])
-            i += 1
-        return output
+            res[-1][1] = max(res[-1][1], end)
+        while idx<n:
+            start, end = intervals[idx]
+            idx += 1
+            if start>res[-1][1]:
+                res.append([start,end])
+            else:
+                res[-1][1] = max(res[-1][1], end)
+        return res
