@@ -9,35 +9,24 @@ You call a pre-defined API int guess(int num), which returns 3 possible results:
 0: The number I picked is equal to your guess (i.e. pick == num).
 Return the number that I picked.
 '''
-
 '''
-Time: O(log2 n)
+Time: O(lgn)
 Space: O(1)
 '''
-
 # The guess API is already defined for you.
 # @param num, your guess
 # @return -1 if my number is lower, 1 if my number is higher, otherwise return 0
-# def guess(num):
+# def guess(num: int) -> int:
 
-'''
-Method below uses binary search.
-'''
-
-class Solution(object):
-    def guessNumber(self, n):
-        """
-        :type n: int
-        :rtype: int
-        """
-        a = 1
-        b = n
-        while a<=b:
-            mid = a+(b-a)/2
+class Solution:
+    def guessNumber(self, n: int) -> int:
+        i, j = 1, n
+        while i<=j:
+            mid = (i+j)//2
             if guess(mid) == 0:
                 return mid
-            elif guess(mid) == -1:
-                b = mid-1
+            elif guess(mid)>0:
+                i = mid+1
             else:
-                a = mid+1
-        
+                j = mid-1
+        return i     
