@@ -25,13 +25,19 @@ Output: [0]
 Time:O(N)
 Space:O(1)
 '''
-        cur, i, j = 0, 0, len(nums)-1
-        while cur <= j:
-            if nums[cur] == 0:
-                nums[i], nums[cur] = nums[cur], nums[i]
-                i, cur = i+1, cur+1
-            elif nums[cur] == 1:
-                cur += 1                
-            else:
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        i, j = 0, len(nums)-1
+        cur = 0
+        while cur<j:
+            if nums[cur]==0:
+                nums[cur], nums[i] = nums[i], nums[cur]
+                cur, i = cur+1, i+1
+            elif nums[cur]==2:
                 nums[cur], nums[j] = nums[j], nums[cur]
                 j -= 1
+            else:
+                cur += 1
