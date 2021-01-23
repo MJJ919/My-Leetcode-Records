@@ -7,7 +7,6 @@ Return the smallest sorted list of ranges that cover every missing number exactl
 That is, no element of nums is in any of the ranges, and each missing number is in one of the ranges.
 
 Each range [a,b] in the list should be output as:
-
 "a->b" if a != b
 "a" if a == b
  
