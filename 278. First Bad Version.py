@@ -9,29 +9,26 @@ Suppose you have n versions [1, 2, ..., n] and you want to find out the first ba
 You are given an API bool isBadVersion(version) which returns whether version is bad. 
 Implement a function to find the first bad version. You should minimize the number of calls to the API.
 '''
-
 '''
 Time:O(lgn)
 Space:O(1)
 '''
 # The isBadVersion API is already defined for you.
 # @param version, an integer
-# @return a bool
+# @return an integer
 # def isBadVersion(version):
 
-class Solution(object):
+class Solution:
     def firstBadVersion(self, n):
         """
         :type n: int
         :rtype: int
         """
-        left = 1
-        right = n
-        while left<right:
-            m = left + (right-left)/2
-            if isBadVersion(m):
-                right = m
+        i, j = 1, n
+        while i<=j:
+            mid = (i+j)//2
+            if isBadVersion(mid):
+                j = mid-1
             else:
-                left = m+1
-        return left
-               
+                i = mid+1
+        return i
