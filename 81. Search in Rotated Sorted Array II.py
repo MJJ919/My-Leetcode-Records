@@ -15,31 +15,24 @@ Output: false
 Time:O(lgn)-O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def search(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: bool
-        """
-        if not nums:
-            return False
+class Solution:
+    def search(self, nums: List[int], t: int) -> bool:
         i, j = 0, len(nums)-1
         while i<=j:
-            while i<j and nums[i]==nums[i+1]:
+            while i<j and nums[i+1]==nums[i]:
                 i += 1
-            while i<j and nums[j]==nums[j-1]:
+            while i<j and nums[j-1]==nums[j]:
                 j -= 1
-            mid = (i+j)/2
-            if nums[mid] == target:
+            mid = (i+j)//2
+            if nums[mid]==t:
                 return True
-            if nums[mid]>=nums[i]:
-                if nums[i]<=target<nums[mid]:
+            elif nums[mid]>=nums[i]:
+                if t>=nums[i] and t<nums[mid]:
                     j = mid-1
                 else:
                     i = mid+1
             else:
-                if target>nums[mid] and target<=nums[j]:
+                if nums[mid]<t and nums[j]>=t:
                     i = mid+1
                 else:
                     j = mid-1
