@@ -10,7 +10,7 @@ Return the minimum number of operations needed to achieve your goal.
 '''
 '''
 Time:O(n)
-Space:O(n)
+Space:O(26)
 '''
 class Solution:
     def minCharacters(self, a: str, b: str) -> int:
