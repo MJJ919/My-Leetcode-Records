@@ -17,6 +17,36 @@ Input: nums = [], target = 0
 Output: [-1,-1]
 '''
 '''
+Time:O(lgn)
+Space:O(1)
+'''
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def find(nums, target):
+            i, j = 0, len(nums)-1
+            while i<j:
+                mid = (i+j)//2
+                if nums[mid]<target:
+                    i = mid+1
+                elif nums[mid]>target:
+                    j = mid
+                else:
+                    return mid
+            return i
+        
+        if not nums:    return [-1,-1]
+        idx = find(nums, target)
+        if nums[idx]!=target:
+            return [-1,-1]
+        else:
+            a, b = idx, idx
+            while a>0 and nums[a-1]==target:
+                a -= 1
+            while b<len(nums)-1 and nums[b+1]==target:
+                    b += 1
+        return [a,b]
+    
+'''
 Time:O(n)
 Space:O(n)
 '''
@@ -34,4 +64,3 @@ class Solution(object):
         res.append(d.get(target,[-1,-1])[0])
         res.append(d.get(target,[-1,-1])[-1])
         return res
-        
