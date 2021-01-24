@@ -10,7 +10,6 @@ Example 2:
 Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
 Output: [9,4]
 '''
-
 '''
 Method below uses 2 sets.
 O(M+N) Time(Ave)  O(M*N) Time(Worst)
@@ -28,13 +27,12 @@ class Solution(object):
         for i in nums1:
             if i in nums2:
                 a.append(i)
-        return a
-    
+        return a 
     
 '''
 Method below uses 2 pointers.
-Time:O(n)
-Space:O(1)
+Time:O(nlgn)
+Space:O(n)
 '''
 class Solution(object):
     def intersection(self, nums1, nums2):
@@ -51,7 +49,6 @@ class Solution(object):
                 i += 1
                 j += 1
         return a 
-  
   
 '''
 Method below uses python build-in function &.
