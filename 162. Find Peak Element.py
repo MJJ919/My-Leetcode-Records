@@ -15,14 +15,27 @@ Output: 5
 Explanation: Your function can return either index number 1 where the peak element is 2, or index number 5 where the peak element is 6.
 '''
 '''
+Time:O(lgn)
+Space:O(1)
+'''
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        i, j = 0, len(nums)-1
+        while i<j:
+            mid = (i+j)//2
+            if nums[mid]>nums[mid+1]:
+                j = mid
+            else:
+                i = mid+1
+        return i
+    
+'''
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def findPeakElement(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        a = max(nums)
-        return nums.index(a)
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        for i in range(1,len(nums)):
+            if nums[i]<nums[i-1]:
+                return i-1
+        return len(nums)-1
