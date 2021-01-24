@@ -10,7 +10,6 @@ Example 2:
 Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
 Output: [4,9]
 '''
-
 '''
 Method below uses 2 pointers.
 Time:O(nlogn)
@@ -30,7 +29,6 @@ class Solution(object):
                 a.append(nums1[i])
                 i,j = i+1, j+1
         return a 
-
 
 '''
 Method below uses hashmap.
