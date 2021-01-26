@@ -8,7 +8,6 @@ Return the index of the first occurrence of needle in haystack, or -1 if needle 
 Time:O(n)
 Space:O(1)
 '''
-
 class Solution(object):
     def strStr(self, haystack, needle):
         """
@@ -16,8 +15,7 @@ class Solution(object):
         :type needle: str
         :rtype: int
         """
-        return haystack.find(needle)
-        
+        return haystack.find(needle)        
   
 '''
 The following method uses sliding window.
