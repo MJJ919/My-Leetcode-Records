@@ -15,19 +15,16 @@ Output: 0
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def lengthOfLastWord(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        n, l = 0, len(s)
-        while l>0:
-            l -= 1
-            if s[l]!=' ':
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        n = 0
+        i = len(s)-1
+        while i>=0:
+            if s[i]!=' ':
                 n += 1
             elif n>0:
                 return n
+            i -= 1
         return n
   
 '''
