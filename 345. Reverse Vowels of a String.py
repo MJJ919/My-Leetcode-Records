@@ -10,26 +10,20 @@ Example 2:
 Input: "leetcode"
 Output: "leotcede"
 '''
-
 '''
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def reverseVowels(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
+class Solution:
+    def reverseVowels(self, s: str) -> str:
         s = list(s)
-        vowel = ('AEIOUaeiou')
-        i,j = 0, len(s)-1
-        while i<j:
-            if s[i] in vowel and s[j] in vowel:
-                s[i],s[j] = s[j],s[i]
-                i, j = i+1, j-1
-            elif s[i] not in vowel:
-                i = i+1
-            else:
-                j = j-1
+        i, j = 0, len(s)-1
+        vowel = ['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']
+        while i <= j:
+            while i<j and s[i] not in vowel:
+                i += 1
+            while i<j and s[j] not in vowel:
+                j -= 1
+            s[i], s[j] = s[j], s[i]
+            i, j = i+1, j-1
         return ''.join(s)
