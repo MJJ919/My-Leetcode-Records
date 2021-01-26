@@ -9,7 +9,6 @@ return 0.
 s = "loveleetcode"
 return 2.
 '''
-
 '''
 Method below uses hashtable.
 Time:O(n)
