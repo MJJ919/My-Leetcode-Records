@@ -7,19 +7,12 @@ If there is no common prefix, return an empty string "".
 Example 1:
 Input: strs = ["flower","flow","flight"]
 Output: "fl"
-
-Example 2:
-Input: strs = ["dog","racecar","car"]
-Output: ""
-Explanation: There is no common prefix among the input strings.
 '''
-
 '''
 Method below finds the shortest string first. Then compare the shortest one with others.
 Time:O(n)
 Space:O(1) I guess. Not sure.
 '''
-
 class Solution(object):
     def longestCommonPrefix(self, strs):
         """
@@ -36,3 +29,16 @@ class Solution(object):
             else:
                 break
         return prefix
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        if not strs:    return ""
+        strs = sorted(strs, key = lambda x:len(x))
+        n = strs[0]
+        for i in strs[1:]:
+            j = 0
+            while j<len(n) and n[j]==i[j]:
+                j += 1
+            n = n[:j]
+            if not n:   return ""
+        return n 
