@@ -9,25 +9,21 @@ Output: ["b","l","u","e"," ","i","s"," ","s","k","y"," ","t","h","e"]
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def reverseWords(self, s):
+class Solution:
+    def reverseWords(self, s: List[str]) -> None:
         """
-        :type s: List[str]
-        :rtype: None Do not return anything, modify s in-place instead.
+        Do not return anything, modify s in-place instead.
         """
-        self.reverse(s, 0, len(s)-1)
-        self.re_word(s)
-    
-    def reverse(self, s, left, right):
-        while left<right:
-            s[left], s[right] = s[right], s[left]
-            left, right = left+1, right-1
-    
-    def re_word(self, s):
-        n = len(s)
-        i = j = 0
-        while i<n:
-            while j<n and s[j]!=' ':
-                j += 1
-            self.reverse(s, i, j-1)
-            i,j = j+1, j+1
+        s.reverse()
+        
+        def reverse(s, i, j):
+            while i<=j:
+                s[i], s[j] = s[j], s[i]
+                i, j = i+1, j-1
+        
+        start, end = 0, 0 
+        while start<len(s):
+            while end<len(s) and s[end] != ' ':
+                end += 1
+            reverse(s, start, end-1)
+            start, end = end+1, end+1
