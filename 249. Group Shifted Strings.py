@@ -18,17 +18,13 @@ Output:
 Time:O(n**2)
 Space:O(n)
 '''
-class Solution(object):
-    def groupStrings(self, strings):
-        """
-        :type strings: List[str]
-        :rtype: List[List[str]]
-        """
+class Solution:
+    def groupStrings(self, strings: List[str]) -> List[List[str]]:
         d = defaultdict(list)
         for i in strings:
-            key = []
+            ch = str()
             for j in range(len(i)-1):
-                diff = 26 + ord(i[j+1]) - ord(i[j])
-                key += str(diff%26)
-            d[''.join(key)].append(i)
+                diff = (26+ord(i[j])-ord(i[j-1]))%26
+                ch += str(diff)
+            d[ch].append(i)
         return d.values()
