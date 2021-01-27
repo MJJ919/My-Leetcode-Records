@@ -4,22 +4,18 @@ Given an array of strings strs, group the anagrams together. You can return the 
 An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, 
 typically using all the original letters exactly once.
 '''
-
 '''
 Method below uses defaultdict.
 Time:O(NKlogK)
 Space:O(NK)
 '''
-class Solution(object):
-    def groupAnagrams(self, strs):
-        """
-        :type strs: List[str]
-        :rtype: List[List[str]]
-        """
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         d = defaultdict(list)
         for i in strs:
-            d[tuple(sorted(i))].append(i)
-        return d.values()
+            ch = ''.join(sorted(i))
+            d[ch].append(i)
+        return [i for i in d.values()]
 
 '''
 Time:O(NK)
