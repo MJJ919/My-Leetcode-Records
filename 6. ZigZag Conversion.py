@@ -6,7 +6,6 @@ P   A   H   N
 A P L S I I G
 Y   I   R
 And then read line by line: "PAHNAPLSIIGYIR"
-
 Write the code that will take a string and make this conversion given a number of rows:
 string convert(string s, int numRows);
 
@@ -25,15 +24,16 @@ Space:O(1)
 '''
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
-        res = []
-        n = 2*numRows-2
         if numRows == 1:
             return s
+        n = 2*numRows - 2
+        res = []
         for i in range(numRows):
-            for j in range(len(s)):
-                if (j%(n) == i) or (j%(n) == n-i):
-                    res.append(s[j])
-        return ''.join(i for i in res)
+            for j in range(0, len(s)-i, n):
+                res.append(s[j+i])
+                if i!=0 and i!=numRows-1 and j+n-i<len(s):
+                    res.append(s[j+n-i])
+        return ''.join(res)
         
 '''
 Time:O(n)
