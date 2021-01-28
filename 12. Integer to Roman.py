@@ -28,6 +28,17 @@ Space:O(1)
 '''
 class Solution:
     def intToRoman(self, num: int) -> str:
+        digits = [(1000, "M"), (900, "CM"), (500, "D"), (400, "CD"), (100, "C"), (90, "XC"), 
+          (50, "L"), (40, "XL"), (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")]
+        res = []
+        for digit, ch in digits:
+            if num==0:  break
+            count, num = divmod(num, digit)
+            res.append(ch*count)
+        return ''.join(res)
+    
+class Solution:
+    def intToRoman(self, num: int) -> str:
         thousands = ["", "M", "MM", "MMM"]
         hundreds = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"]
         tens = ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"]
