@@ -17,9 +17,6 @@ Input: s = "", t = ""
 Output: false
 Explanation: We cannot get t from s by only one step.
 
-Example 3:
-Input: s = "a", t = ""
-Output: true
 '''
 '''
 Time:O(n)
