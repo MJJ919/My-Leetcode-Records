@@ -28,10 +28,6 @@ Space:O(2**(n-1))
 '''
 class Solution(object):
     def countAndSay(self, n):
-        """
-        :type n: int
-        :rtype: str
-        """
         if n == 1:  return '1'
         s = self.countAndSay(n-1)
         i, j = 0, 0
@@ -43,3 +39,24 @@ class Solution(object):
                 res += str(i-j+1) + str(s[i])
                 i, j = i+1, i+1
         return res
+
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        return ''.join(self.next(n, ['1', 'E']))
+    
+    def next(self, n, prev):
+        if n==1:
+            return prev[:-1]
+        digcount = 1
+        prevdig = prev[0]
+        nextseq = []
+        for digit in prev[1:]:
+            if digit == prevdig:
+                digcount += 1
+            else:
+                nextseq.append(str(digcount))
+                nextseq.append(prevdig)
+                prevdig = digit
+                digcount = 1
+        nextseq.append('E')
+        return self.next(n-1, nextseq)
