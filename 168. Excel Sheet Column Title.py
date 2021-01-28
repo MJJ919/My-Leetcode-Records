@@ -11,15 +11,14 @@ For example:
     27 -> AA
     28 -> AB 
 '''
-class Solution(object):
-    def convertToTitle(self, n):
-        """
-        :type n: int
-        :rtype: str
-        """
-        output = ""
-        rem = 0
-        while n > 0:
-            output += chr((n-1)%26 + 65)
+'''
+Time:O(n)
+Space:O(1)
+'''
+class Solution:
+    def convertToTitle(self, n: int) -> str:
+        res = []
+        while n>0:
+            res.append(chr((n-1)%26+65))
             n = (n-1)//26
-        return output[::-1]
+        return ''.join(reversed(res))
