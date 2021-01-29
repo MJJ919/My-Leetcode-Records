@@ -19,15 +19,12 @@ Output: true
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def isStrobogrammatic(self, num):
-        """
-        :type num: str
-        :rtype: bool
-        """
-        d = {'0':'0', '1':'1', '6':'9', '8':'8', '9':'6'}
-        i , j = 0, len(num)-1
+class Solution:
+    def isStrobogrammatic(self, num: str) -> bool:
+        d = {'6':'9', '0':'0', '8':'8', '9':'6','1':'1' }
+        i, j = 0, len(num)-1
         while i<=j:
-            if num[i] not in d or num[j]!=d[num[i]]:    return False
+            if num[i] not in d or d[num[i]]!=num[j]:
+                return False
             i, j = i+1, j-1
         return True
