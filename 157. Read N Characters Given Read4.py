@@ -6,6 +6,7 @@ Time:O(n)
 Space:O(1)
 '''
 """
+"""
 The read4 API is already defined for you.
 
     @param buf4, a list of characters
@@ -20,21 +21,21 @@ read4(buf4) # read4 returns 4. Now buf = ['e','f','g','h'], fp points to 'i'
 read4(buf4) # read4 returns 3. Now buf = ['i','j','k',...], fp points to end of file
 """
 
-class Solution(object):
+class Solution:
     def read(self, buf, n):
         """
         :type buf: Destination buffer (List[str])
         :type n: Number of characters to read (int)
         :rtype: The number of actual characters read (int)
         """
-        read = 4
-        buf4 = ['']*4
-        copy = 0
-        while copy < n and read == 4:
+        buf4 = [''] * 4
+        count = 0
+        read= 4
+        while count<n and read==4:
             read = read4(buf4)
             for i in range(read):
-                if copy == n:
-                    return copy
-                buf[copy] = buf4[i]
-                copy += 1
-        return copy
+                if count == n:
+                    return count
+                buf[count] = buf4[i]
+                count += 1
+        return count
