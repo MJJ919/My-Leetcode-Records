@@ -7,15 +7,10 @@ Note: For the purpose of this problem, we define empty string as valid palindrom
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def isPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
-        s = "".join([c for c in s if c.isalnum()]).lower() #isalnum() judges whether this character is a number/letter or not
-        # Another method: s = re.sub('[^A-Za-z0-9]+', '', s).lower()
-        return s[::-1] == s
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        s = ''.join(i.lower() for i in s if i.isalnum())
+        return s==s[::-1]
 
 '''
 Time:O(n)
