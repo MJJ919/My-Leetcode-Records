@@ -14,20 +14,22 @@ Example 3:
 Input: l1 = [], l2 = [0]
 Output: [0]
 '''
-
 '''
 Time: O(n+m)
 Space: O(1)
 '''
-l = ListNode(0)
-        p = l
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        dummy = ListNode(-1)
+        head = ListNode(0)
+        dummy = head
         while l1 and l2:
-            if l1.val < l2.val:
-                l.next = l1
-                l1 = l1.next
-            else:
-                l.next = l2
+            if l1.val>l2.val:
+                head.next = l2
                 l2 = l2.next
-            l = l.next
-        l.next = l1 if l1 != None else l2
-        return p.next
+            else:
+                head.next = l1
+                l1 = l1.next
+            head = head.next
+        head.next = l1 if l1 else l2
+        return dummy.next
