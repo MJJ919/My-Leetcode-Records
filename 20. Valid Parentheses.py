@@ -37,3 +37,16 @@ class Solution(object):
             else:
                 return False
         return not stack
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        pair = {')':'(', '}':'{', ']':'['}
+        stack = deque()
+        for i in s:
+            if i not in pair:
+                stack.append(i)
+            elif not stack or stack.pop() != pair[i]:
+                return False
+        if not stack:
+            return True
+        return False
