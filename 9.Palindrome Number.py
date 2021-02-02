@@ -7,18 +7,10 @@ Follow up: Could you solve it without converting the integer to a string?
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def isPalindrome(self, x):
-        """
-        :type x: int
-        :rtype: bool
-        """
-        if x < -2**31 or x > 2**31-1:
-            return False
-        else:
-            palindrome = str(x)[::-1]
-        if palindrome == str(x):
-            return True
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        if x<0: return False
+        return str(x)==str(x)[::-1]
 
 '''
 Time:O(n)
@@ -39,7 +31,6 @@ Method below does not convert int to str
 Time:O(n)
 Space:O(1)
 '''
-
 class Solution(object):
     def isPalindrome(self, x):
         a = x
