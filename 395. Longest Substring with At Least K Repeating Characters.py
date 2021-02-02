@@ -17,17 +17,11 @@ Explanation: The longest substring is "ababb", as 'a' is repeated 2 times and 'b
 Time:O(n**2)
 Space:O(n)
 '''
-class Solution(object):
-    def longestSubstring(self, s, k):
-        """
-        :type s: str
-        :type k: int
-        :rtype: int
-        """
-        if len(s)<k:
-            return 0
-        c = min(set(s), key = s.count)
-        for i in c:
-            if s.count(i) >= k:
-                return len(s)
-        return max(self.longestSubstring(t,k) for t in s.split(c))
+class Solution:
+    def longestSubstring(self, s: str, k: int) -> int:
+        if len(s) == 0 or len(s)<k: return 0
+        counter = Counter(s)
+        for ch in counter:
+            if counter[ch]<k:
+                return max(self.longestSubstring(substring,k) for substring in s.split(ch))
+        return len(s)
