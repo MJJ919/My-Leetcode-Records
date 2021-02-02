@@ -16,22 +16,19 @@ Explanation: t is "aabbb" which its length is 5.
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def lengthOfLongestSubstringTwoDistinct(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        if len(s)<3:    return len(s)
-        left, right = 0, 0
-        mx = 2
-        d = defaultdict(int)
-        while right<len(s):
-            d[s[right]] = right
-            right += 1
-            if len(d) == 3:
-                idx = min(d.values())
-                del d[s[idx]]
-                left = idx+1
-            mx = max(mx, right-left)
-        return mx
+class Solution:
+    def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
+        if len(s)<3:
+            return len(s)
+        seen = defaultdict(int)
+        res = 0
+        i, j = 0, 0
+        while j<len(s):
+            seen[s[j]] = j
+            if len(seen)>2:
+                del_idx = min(seen.values())
+                del seen[s[del_idx]]
+                i = del_idx+1
+            res = max(res, j-i+1)
+            j += 1
+        return res
