@@ -14,49 +14,28 @@ Example 3:
 Input: "carerac"
 Output: true
 '''
-
 '''
 Time:O(n)
 Space:O(1)
 '''
 class Solution(object):
     def canPermutePalindrome(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
         d = defaultdict(int)
         for i in s:
             d[i] += 1
         return sum(v % 2 for v in dict.values()) < 2
  
-'''
-Time:O(n)
-Space:O(1)
-'''
-class Solution(object):
-    def canPermutePalindrome(self, s):
-        d = defaultdict(int)
-        for i in s:
-            d[i] += 1
-        flag = 0
-        for i in d:
-            if d[i] != 2:
-                flag += 1
-            if flag > 1:
-                    return False
-        return True
+class Solution:
+    def canPermutePalindrome(self, s: str) -> bool:
+        counter = Counter(s)
+        count = 0
+        for ch in counter:
+            if counter[ch]!=2:
+                count += 1
+        return count<2
     
-'''
-Time:O(n)
-Space:O(1)
-'''
 class Solution(object):
     def canPermutePalindrome(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """
         l = []
         for i in s:
             if i in l:
