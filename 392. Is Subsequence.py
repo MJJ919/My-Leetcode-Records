@@ -5,7 +5,6 @@ Given a string s and a string t, check if s is subsequence of t.
 A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) 
 of the characters without disturbing the relative positions of the remaining characters. (ie, "ace" is a subsequence of "abcde" while "aec" is not).
 '''
-
 '''
 Method below uses 2 pointers, starts comparing from the right.
 Time:O(∣T∣)
@@ -30,12 +29,17 @@ class Solution(object):
             
 '''
 Method below uses iter() function.
-Time:O(|s| + |t|)
+Time:O(|s|*|t|)
 Space:O(1)
 '''
-def isSubsequence(self, s, t):
-    remainder_of_t = iter(t)
-    for letter in s:
-        if letter not in remainder_of_t:
-            return False
-    return True
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:       
+        for ch in s:
+            i = 0
+            for i in range(len(t)):
+                if t[i] == ch:
+                    t = t[i+1:]
+                    break
+            else:
+                return False
+        return True
