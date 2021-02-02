@@ -21,18 +21,17 @@ https://leetcode.com/problems/longest-palindromic-substring/discuss/2954/Python-
 Time:O(n**2)
 Space:O(1)
 '''
-class Solution(object):
-    def longestPalindrome(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
-        res = ''
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        def helper(s, left, right):
+            while left>=0 and right<len(s):
+                if s[left] == s[right]:
+                    left, right = left-1, right+1
+                else:
+                    break
+            return s[left+1:right]
+        
+        res  = ''
         for i in range(len(s)):
-            res = max(self.helper(s, i, i), self.helper(s, i, i+1), res, key = len)
+            res = max(helper(s, i, i), helper(s, i, i+1), res, key = len)
         return res
-    
-    def helper(self, s, l, r):
-        while l>=0 and r<len(s) and s[l] == s[r]:
-                l, r = l-1, r+1
-        return s[l+1:r]
