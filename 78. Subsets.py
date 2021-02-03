@@ -32,17 +32,16 @@ Backtracking.
 Time:O(n*2^n)
 Space:O(n*2^n)
 '''
-class Solution(object):
-    def subsets(self, nums):
-        def back(start, cur):
-            res.append(cur[:])
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        def back(n, subset):
+            res.append(subset[:])
+            for i in range(n, len(nums)):
+                subset.append(nums[i])
+                back(i+1, subset)
+                subset.pop()
             
-            for j in range(start, n):
-                cur.append(nums[j])
-                back(j+1,cur)
-                cur.pop()
-                
         res = []
         n = len(nums)
-        back(0,[])
+        back(0, [])
         return res
