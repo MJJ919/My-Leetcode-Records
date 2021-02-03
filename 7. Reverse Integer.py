@@ -26,7 +26,6 @@ class Solution(object):
         else:
             return reverse
 '''
-Method below uses math.
 Time:O(log(x))
 Space:O(1)
 '''     
