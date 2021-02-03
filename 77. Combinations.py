@@ -19,20 +19,18 @@ Output:
 Time:O(n*2^n)
 Space:O(n*2^n)
 '''
-class Solution(object):
-    def combine(self, n, k):
-        """
-        :type n: int
-        :type k: int
-        :rtype: List[List[int]]
-        """
-        def back(start, cur):
-            if len(cur)==k:
-                res.append(cur[:])
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        def back(start, subset):
+            if len(subset)==k:
+                res.append(subset[:])
             for i in range(start, n+1):
-                cur.append(i)
-                back(i+1, cur)
-                cur.pop()
+                subset.append(i)
+                back(i+1, subset)
+                subset.pop()
+        res = []
+        back(1, [])
+        return res
                 
         res = []
         back(1, [])
