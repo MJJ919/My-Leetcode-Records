@@ -25,23 +25,22 @@ Time:O()
 Space:O()
 '''
 class Solution:
-    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
-        def back(target, first, counter, cur):
-            if target == 0:
-                res.append(cur[:])
-                return
-            elif target < 0:
-                return 
-            for i in range(first, len(counter)):
-                num, freq = counter[i]
-                if freq > 0:
-                    cur.append(num)
-                    counter[i] = (num, freq-1)
-                    back(target-num, i, counter, cur)
-                    cur.pop()
-                    counter[i] = (num, freq)
+    def combinationSum2(self, nums: List[int], target: int) -> List[List[int]]:
+        def back(subset, start, nums, target):
+            if target<0:    return 
+            if target==0:   res.append(subset[:])
+            for i in range(start, len(nums)):
+                num, freq = nums[i]
+                if freq>0:
+                    subset.append(num)
+                    nums[i] = (num, freq-1)
+                    back(subset, i, nums, target-num)
+                    nums[i] = (num, freq)
+                    subset.pop()
+            
         res = []
-        counter = Counter(candidates)
-        counter = [(c, counter[c]) for c in counter]
-        back(target, 0, counter, [])
+        nums = Counter(nums)
+        nums = [(num, nums[num])for num in nums]
+        print(nums)
+        back([], 0, nums, target)
         return res
