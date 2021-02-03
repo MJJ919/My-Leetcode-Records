@@ -12,22 +12,17 @@ Output:
 Time:O(n*2^n)
 Space:O(n*2^n)
 '''
-class Solution(object):
-    def subsetsWithDup(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        def back(start, cur):
-            if cur not in res:
-                res.append(cur[:])
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        def back(subset, n):
+            if subset not in res:
+                res.append(subset[:])
+            for i in range(n,len(nums)):
+                subset.append(nums[i])
+                back(subset, i+1)
+                subset.pop()
             
-            for i in range(start, n):
-                cur.append(nums[i])
-                back(i+1, cur)
-                cur.pop()
-                
+        res = []
         nums.sort()
-        n, res = len(nums), []
-        back(0, [])
+        back([], 0)
         return res
