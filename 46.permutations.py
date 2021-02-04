@@ -24,20 +24,16 @@ class Solution:
         back([])
         return res
 
-class Solution(object):
-    def permute(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        output=[]
-        def back(first=0):
-            if n==first:
-                output.append(nums[:])
-            for i in range(first,n):
-                nums[i], nums[first] = nums[first], nums[i]
-                back(first+1)
-                nums[i], nums[first] = nums[first], nums[i]
-        n = len(nums)
-        back()
-        return output
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        def back(start):
+            if start==len(nums):
+                res.append(nums[:])
+            for i in range(start, len(nums)):
+                nums[i], nums[start] = nums[start], nums[i]
+                back(start+1)
+                nums[i], nums[start] = nums[start], nums[i]
+
+        res = []
+        back(0)
+        return res
