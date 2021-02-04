@@ -22,16 +22,13 @@ Space:O(T)
 '''
 class Solution:
     def combinationSum4(self, nums: List[int], target: int) -> int:
-        @functools.lru_cache(maxsize = None)
-        def count(remain):
-            if remain==0:
-                return 1
-            res = 0
-            for i in nums:
-                if remain-i>=0:
-                    res += count(remain-i)
-                #else:
-                    #break
-            return res
-        
-        return count(target)
+        dp = [0 for _ in range(target+1)]
+        dp[0] = 1
+        nums.sort()
+        for i in range(1, target+1):
+            for num in nums:
+                if i-num>=0:
+                    dp[i] += dp[i-num]
+                else:
+                    break
+        return dp[target]
