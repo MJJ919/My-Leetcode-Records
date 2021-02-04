@@ -12,15 +12,16 @@ backtracking.
 '''
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        def back(cur):
-            if len(cur)==n:
-                res.append(cur[:])
-            for i in nums:
-                if i not in cur:
-                    cur.append(i)
-                    back(cur)
-                    cur.pop()
-        res, n = [], len(nums)
+        def back(subset):
+            if len(subset)==len(nums):
+                res.append(subset[:])
+            for num in nums:
+                if num not in subset:
+                    subset.append(num)
+                    back(subset)
+                    subset.pop()
+
+        res = []
         back([])
         return res
 
