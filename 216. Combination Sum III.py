@@ -6,26 +6,20 @@ Only numbers 1 through 9 are used.
 Each number is used at most once.
 Return a list of all possible valid combinations. The list must not contain the same combination twice, and the combinations may be returned in any order.
 '''
-class Solution(object):
-    def combinationSum3(self, k, n):
-        """
-        :type k: int
-        :type n: int
-        :rtype: List[List[int]]
-        """
-        def back(start,cur):
-            if len(cur)==k and sum(cur)==n:
-                res.append(cur[:])
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        def back(start, target, subset):
+            if target<0 or len(subset)>k:
                 return
-            elif sum(cur)>n or len(cur)>k:
-                return 
-            for i in range(start,10):
-                cur.append(i)
-                back(i+1,cur)
-                cur.pop()
+            elif target==0 and len(subset)==k:
+                res.append(subset[:])
+            for num in range(start,10):
+                subset.append(num)
+                back(num+1, target-num, subset)
+                subset.pop()
         
-        res=[]
-        back(1,[])
+        res = []
+        back(1, n, [])
         return res
         
 '''
