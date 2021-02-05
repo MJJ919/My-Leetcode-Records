@@ -17,16 +17,17 @@ class Solution:
              '7': ['p', 'q', 'r', 's'],
              '8': ['t', 'u', 'v'],
              '9': ['w', 'x', 'y', 'z']}
-        def back(digits, cur):
-            if len(digits)==0:
-                res.append(cur[:])
-                return 
-            for i in d[digits[0]]:
-                cur += i
-                back(digits[1:], cur)
-                cur = cur[:-1]
         
-        res =[]
+        def back(digits, subset):
+            if not digits:
+                res.append(subset[:])
+                return 
+            for ch in d[digits[0]]:
+                subset += ch
+                back(digits[1:], subset)
+                subset = subset[:-1]
+        
+        res = []
         if digits:
             back(digits, '')
         return res
