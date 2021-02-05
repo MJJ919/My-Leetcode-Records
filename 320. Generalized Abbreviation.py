@@ -9,19 +9,15 @@ Example 1:
 Input: word = "word"
 Output: ["4","3d","2r1","2rd","1o2","1o1d","1or1","1ord","w3","w2d","w1r1","w1rd","wo2","wo1d","wor1","word"]
 '''
-
 class Solution:
     def generateAbbreviations(self, word: str) -> List[str]:
-        n = len(word)
-        res = []
-        def back(idx, cur):
-            if idx == n:
-                res.append(cur)
+        def back(idx, substr):
+            if idx==len(word):
+                res.append(substr[:])
                 return 
-            back(idx+1, cur+word[idx])
-            for i in range(1, n-idx+1):
-                if not cur or not cur[-1].isnumeric():
-                    back(idx+i, cur+str(i))
-                else:   return
-        back(0, '')
-        return res
+            back(idx+1, substr+word[idx])
+            for i in range(1, len(word)-idx+1):
+                if not substr or not substr[-1].isnumeric():
+                    back(idx+i, substr+str(i))
+                else:
+                    return
