@@ -19,24 +19,27 @@ Space:
 '''
 class Solution:
     def restoreIpAddresses(self, s: str) -> List[str]:
-        def back(s, cur):
-            if output(s,cur):
-                for i in range(0, len(s)):
-                    if valid(s[:i+1]):
-                        cur.append(s[:i+1])
-                        back(s[i+1:], cur)
-                        cur.pop()
-                        
-        def output(s, cur):
-            if len(cur)>4 and s:
-                return False
-            elif len(cur)==4 and not s:
-                res.append('.'.join(cur))
-                return False
-            return True
-                
-        def valid(s):
-            return int(s)<256 if s[0]!='0' else len(s)==1
+        def valid(substr):
+            return int(substr)<=255 if substr[0]!='0' else len(substr)==1
+        
+        def update(segments, pos):
+            segment = s[pos+1:]
+            if valid(segment):
+                segments.append(segment)
+                res.append('.'.join(segments))
+                segments.pop()
+        
+        def back(pre, dot, segments):
+            for pos in range(pre+1, min(pre+4,len(s)-1)):
+                segment = s[pre+1:pos+1]
+                if valid(segment):
+                    segments.append(segment)
+                    if dot-1==0:
+                        update(segments, pos)
+                    else:
+                        back(pos, dot-1, segments)
+                    segments.pop()
+        
         res = []
-        back(s, [])
+        back(-1, 3, [])
         return res
