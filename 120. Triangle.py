@@ -15,15 +15,15 @@ The minimum path sum from top to bottom is 2 + 3 + 5 + 1 = 11 (underlined above)
 '''
 '''
 Time:O(n)
-Space:O(n*n)
+Space:O(1)
 '''
 class Solution:
-    def minimumTotal(self, triangle: List[List[int]]) -> int:
-        n = len(triangle)
-        res = [[float('inf')for _ in range(n)]for _ in range(n)]
-        res[0][0] = triangle[0][0]
-        for i in range(1,n):
-            for j in range(len(triangle[i])):
-                val = res[i-1][j] if j==0 else min(res[i-1][j-1], res[i-1][j-1])
-                res[i][j] = triangle[i][j]+val
-        return min(res[-1])
+    def minimumTotal(self, t: List[List[int]]) -> int:
+        if len(t)==1:
+            return t[0][0]
+        for i in range(1, len(t)):
+            t[i][0] = t[i][0]+t[i-1][0]
+            t[i][-1] = t[i][-1]+t[i-1][-1]
+            for j in range(1,len(t[i])-1):
+                t[i][j] = t[i][j]+min(t[i-1][j-1], t[i-1][j])
+        return min(t[-1])
