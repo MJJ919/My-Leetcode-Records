@@ -16,18 +16,31 @@ Explanation: 13 = 4 + 9.
 Time:O(n**(3/2))
 Space:O(n)
 '''
-class Solution(object):
-    def numSquares(self, n):
-        """
-        :type n: int
-        :rtype: int
-        """
-        squares = [i**2 for i in range(0, int(n**0.5)+1)]
-        dp = [float('inf')]*(n+1)
+class Solution:
+    def numSquares(self, n: int) -> int:
+        sqr_num = [i*i for i in range(floor(sqrt(n))+1)]
+        dp = [float('inf') for _ in range(n+1)]
         dp[0] = 0
-        for i in range(1,n+1):
-            for s in squares:
-                if i<s:
-                    break
-                dp[i] = min(dp[i], dp[i-s]+1)
+        for i in range(1, n+1):
+            for num in sqr_num:
+                if i<num:   break
+                dp[i] = min(dp[i], dp[i-num]+1)
         return dp[-1]
+    
+'''
+'''
+class Solution:
+    def numSquares(self, n: int) -> int:
+        sqr_num = [i*i for i in range(1, int(sqrt(n))+1)]
+        
+        def divide(count, n):
+            if count==1:
+                return n in sqr_num
+            for num in sqr_num:
+                if divide(count-1, n-num):
+                    return True
+            return False
+            
+        for count in range(1, n+1):
+            if divide(count, n):
+                return count
