@@ -19,7 +19,6 @@ Explanation: There are three ways to climb to the top.
 3. 2 steps + 1 step
 '''
 '''
-Method below uses Fibonacci.
 Time:O(n)
 Space:O(1)
 '''
