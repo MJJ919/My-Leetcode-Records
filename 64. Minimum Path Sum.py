@@ -15,18 +15,16 @@ Output: 12
 Time:O(M*N)
 Space:O(1)
 '''
-class Solution(object):
-    def minPathSum(self, grid):
-        """
-        :type grid: List[List[int]]
-        :rtype: int
-        """
-        i,j=len(grid),len(grid[0])
-        for a in range(1,i):
-            grid[a][0] += grid[a-1][0]
-        for b in range(1,j):
-            grid[0][b] += grid[0][b-1]
-        for a in range(1,i):
-            for b in range(1,j):
-                grid[a][b] += min(grid[a-1][b],grid[a][b-1])
-        return grid[-1][-1]
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        if not grid:    return 0
+        row = len(grid)
+        col = len(grid[0])
+        for i in range(1, row):
+            grid[i][0] += grid[i-1][0]
+        for j in range(1, col):
+            grid[0][j] += grid[0][j-1]
+        for i in range(1,row):
+            for j in range(1, col):
+                grid[i][j] += min(grid[i-1][j], grid[i][j-1])
+        return grid[row-1][col-1]
