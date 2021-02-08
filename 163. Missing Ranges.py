@@ -25,12 +25,6 @@ Space:O(n)
 '''
 class Solution(object):
     def findMissingRanges(self, nums, lower, upper):
-        """
-        :type nums: List[int]
-        :type lower: int
-        :type upper: int
-        :rtype: List[str]
-        """     
         res = []
         nums = [lower-1] + nums + [upper+1]
         for i in range(1, len(nums)):
@@ -43,3 +37,22 @@ class Solution(object):
             res.append(str(start+1))
         else:
             res.append(str(start+1)+"->"+str(end-1))
+
+class Solution:
+    def findMissingRanges(self, nums: List[int], lower: int, upper: int) -> List[str]:
+        res = []
+        if not nums:
+            if lower==upper:    res.append(str(lower))
+            else:   res.append(str(lower)+'->'+str(upper))
+            return res
+        if lower != nums[0]:    nums = [lower-1] + nums
+        if upper != nums[-1]:   nums = nums + [upper+1]
+        print(nums)
+        for i in range(1, len(nums)):
+            string = ''
+            if nums[i]==nums[i-1]+2:
+                string+=str(nums[i-1]+1)
+            elif nums[i]>nums[i-1]+2:
+                string+= str(nums[i-1]+1)+'->'+str(nums[i]-1)
+            if string:  res.append(string)
+        return res    
