@@ -18,9 +18,27 @@ Space:O(n)
 '''
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        d = [False]*len(s)
-        for i in range(len(s)):
-            for word in wordDict:
-                if s[i-len(word)+1:i+1]==word and (d[i-len(word)] or i-len(word)==-1):
-                    d[i] = True
-        return d[-1]
+        dp = [False for _ in range(len(s)+1)]
+        dp[0] = True
+        words = set(wordDict)
+        for i in range(1, len(s)+1):
+            for j in range(i+1):
+                if dp[j]==True and s[j:i] in words:
+                    dp[i] = True
+                    break
+        return dp[len(s)]
+    
+'''
+'''
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        @lru_cache
+        def wordbreak(start):
+            if start==len(s):
+                return True
+            for end in range(start+1, len(s)+1):
+                if s[start:end] in words and wordbreak(end):
+                    return True
+            return False
+        words = set(wordDict)
+        return wordbreak(0)
