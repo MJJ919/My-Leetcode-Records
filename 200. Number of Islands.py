@@ -21,20 +21,19 @@ Space:O(M*N)
 '''
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        def dfs(r,c):
-            if r>=row or r<0 or c>=col or c<0 or grid[r][c]=='0':
-                return 
-            grid[r][c] = '0'
-            dfs(r-1, c)
-            dfs(r+1, c)
-            dfs(r, c-1)
-            dfs(r, c+1)
-            
-        row, col = len(grid), len(grid[0])
-        num = 0
-        for i in range(row):
-            for j in range(col):
+        m, n = len(grid), len(grid[0])
+        direction = [[1,0], [0,1], [-1, 0], [0, -1]]
+        def find(row, col):
+                if row<0 or row>=m or col<0 or col>=n or grid[row][col]=='0':
+                    return
+                grid[row][col] = '0'
+                for [k, j] in direction:
+                    find(row+k, col+j)
+                
+        count = 0            
+        for i in range(m):
+            for j in range(n):
                 if grid[i][j]=='1':
-                    num += 1
-                    dfs(i, j)
-        return num
+                    find(i, j)
+                    count += 1
+        return count
