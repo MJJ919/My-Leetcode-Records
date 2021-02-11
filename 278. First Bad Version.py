@@ -13,11 +13,6 @@ Implement a function to find the first bad version. You should minimize the numb
 Time:O(lgn)
 Space:O(1)
 '''
-# The isBadVersion API is already defined for you.
-# @param version, an integer
-# @return an integer
-# def isBadVersion(version):
-
 class Solution:
     def firstBadVersion(self, n):
         """
