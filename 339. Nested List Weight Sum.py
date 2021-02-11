@@ -14,7 +14,6 @@ Space:O(d)
 '''
 class Solution:
     def depthSum(self, nestedList: List[NestedInteger]) -> int:
-        
         def dfs(l, depth):
             s = 0
             for i in l:
