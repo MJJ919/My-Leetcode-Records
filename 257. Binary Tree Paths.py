@@ -17,22 +17,16 @@ Output: ["1->2->5", "1->3"]
 Time:O(N)
 Space:O(N)
 '''
-class Solution(object):
-    def binaryTreePaths(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[str]
-        """
-        def helper(node, path):
-            if not node:
-                return
-            path += str(node.val)
+class Solution:
+    def binaryTreePaths(self, root: TreeNode) -> List[str]:
+        def build(node, leaf):
+            if not node:    return
+            leaf += str(node.val)
             if not node.left and not node.right:
-                res.append(path)
-            path += '->'
-            helper(node.left, path)
-            helper(node.right, path) 
-        
+                res.append(leaf)
+            leaf += '->'
+            build(node.left, leaf)
+            build(node.right, leaf)
         res = []
-        helper(root, '')
+        build(root, '')
         return res
