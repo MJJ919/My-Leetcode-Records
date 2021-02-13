@@ -11,35 +11,32 @@ Recursion
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def postorderTraversal(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[int]
-        """
+class Solution:
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        def postorder(node):
+            if node:
+                postorder(node.left)
+                postorder(node.right)
+                res.append(node.val)            
         res = []
-        self.rec(root, res)
+        postorder(root)
         return res
     
-    def rec(self, node, res):
-        if node:
-            self.rec(node.left, res)
-            self.rec(node.right,res)
-            res.append(node.val)
 '''
 Iteration
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def postorderTraversal(self, root):
-        res, s = [],[]
+class Solution:
+    def postorderTraversal(self, root: TreeNode) -> List[int]:
+        res = []
+        visited = []
         while True:
             while root:
                 res.append(root.val)
-                s.append(root)
+                visited.append(root)
                 root = root.right
-            if not s:
+            if not visited:
                 return res[::-1]
-            node = s.pop()
+            node = visited.pop()
             root = node.left
