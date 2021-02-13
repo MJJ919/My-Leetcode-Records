@@ -37,3 +37,17 @@ class Solution(object):
         
         helper(root, 0)
         return levels
+
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        res = []
+        d = defaultdict(list)
+        def level(node, depth):
+            if node:
+                d[depth].append(node.val)
+                level(node.left, depth+1)
+                level(node.right, depth+1)
+        level(root, 0)
+        for depth, num in d.items():
+            res.append(num)
+        return res
