@@ -10,36 +10,32 @@ Recursion
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def preorderTraversal(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[int]
-        """
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
         res = []
-        self.rec(root, res)
+        def preorder(node):
+            if node:
+                res.append(node.val)
+                preorder(node.left)
+                preorder(node.right)
+        preorder(root)
         return res
-    
-    def rec(self, node, res):
-        if node:
-            res.append(node.val)
-            self.rec(node.left, res)
-            self.rec(node.right, res)
 
 '''
 Iteration
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def preorderTraversal(self, root):
-        res, s = [], []
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        res = []
+        visited = []
         while True:
             while root:
+                visited.append(root)
                 res.append(root.val)
-                s.append(root)
                 root = root.left
-            if not s:
+            if not visited:
                 return res
-            node = s.pop()
+            node = visited.pop()
             root = node.right
