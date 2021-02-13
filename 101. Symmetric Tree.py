@@ -21,17 +21,13 @@ But the following [1,2,2,null,3,null,3] is not:
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def isSymmetric(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
-        return self.isMirror(root, root)
-    
-    def isMirror(self, node1, node2):
-        if not node1 and not node2:
-            return True
-        if not node1 or not node2:
-            return False
-        return node1.val == node2.val and self.isMirror(node1.right, node2.left) and self.isMirror(node1.left, node2.right)
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        def symmetric(node1, node2):
+            if not node1 and not node2:
+                return True
+            if not node1 or not node2:
+                return False
+            return node1.val==node2.val and symmetric(node1.left, node2.right) and symmetric(node1.right, node2.left)
+        
+        return symmetric(root, root)
