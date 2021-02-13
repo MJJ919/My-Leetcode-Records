@@ -11,36 +11,33 @@ Recursion
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def inorderTraversal(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[int]
-        """
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
         res = []
-        self.rec(root, res)
+        def inorder(node):
+            if node:
+                inorder(node.left)
+                res.append(node.val)
+                inorder(node.right)
+        inorder(root)
         return res
-    
-    def rec(self, node, res):
-        if node:
-            self.rec(node.left, res)
-            res.append(node.val)
-            self.rec(node.right, res)
             
 '''
 Iteration
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def inorderTraversal(self, root):
-        res, s = [],[]
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        visited = []
+        res = []
         while True:
             while root:
-                s.append(root)
+                visited.append(root)
                 root = root.left
-            if not s:
+            if not visited:
                 return res
-            node = s.pop()
+            node = visited.pop()
             res.append(node.val)
             root = node.right
+        return res
