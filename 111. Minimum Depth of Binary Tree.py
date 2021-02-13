@@ -22,3 +22,17 @@ class Solution(object):
         elif not root.right:
             return self.minDepth(root.left)+1
         return min(self.minDepth(root.left), self.minDepth(root.right))+1
+
+class Solution:
+    def minDepth(self, root: TreeNode) -> int:
+        def helper(node, depth):
+            if not node:
+                return
+            if not node.left and not node.right:
+                self.res = min(self.res, depth)
+            helper(node.left, depth+1)
+            helper(node.right, depth+1)
+        
+        self.res = float('inf')
+        helper(root, 1)
+        return self.res if self.res!=float('inf') else 0
