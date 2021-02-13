@@ -13,18 +13,16 @@ Space:O(n)
 '''
 class Solution:
     def trap(self, height: List[int]) -> int:
-        if not height:
-            return 0
         n = len(height)
-        left = [0]*n
-        right = [0]*n
-        l,r = height[0], height[n-1]
+        if n==0:    return 0
+        left = [0 for _ in range(n)]
+        right = [0 for _ in range(n)]
+        maxleft, maxright = height[0], height[-1]
         for i in range(n):
-            l = max(l,height[i])
-            left[i] = l
-            r = max(r, height[n-1-i])
-            right[n-i-1] = r
+            maxleft = max(maxleft, height[i])
+            maxright = max(maxright, height[n-i-1])
+            left[i], right[n-i-1] = maxleft, maxright
         res = 0
-        for j in range(n):
-            res += min(left[j], right[j])-height[j]
+        for i in range(n):
+            res += min(left[i], right[i])-height[i]
         return res
