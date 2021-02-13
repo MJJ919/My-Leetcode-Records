@@ -18,17 +18,12 @@ return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22.
 Time:O(N)
 Space:O(N)~O(logN)
 '''
-class Solution(object):
-    def hasPathSum(self, root, sum):
-        """
-        :type root: TreeNode
-        :type sum: int
-        :rtype: bool
-        """
+class Solution:
+    def hasPathSum(self, root: TreeNode, targetSum: int) -> bool:
         if not root:
             return False
-        sum -= root.val
+        targetSum -= root.val
         if not root.left and not root.right:
-            return sum == 0
+            return targetSum==0
         else:
-            return self.hasPathSum(root.right,sum) or self.hasPathSum(root.left,sum)
+            return self.hasPathSum(root.left, targetSum) or self.hasPathSum(root.right, targetSum)
