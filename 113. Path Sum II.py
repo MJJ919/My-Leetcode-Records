@@ -23,24 +23,18 @@ Return:
 Time:
 Space:
 '''
-class Solution(object):
-    def pathSum(self, root, sum):
-        """
-        :type root: TreeNode
-        :type sum: int
-        :rtype: List[List[int]]
-        """
-        def helper(node, res, sum, path):
+class Solution:
+    def pathSum(self, root: TreeNode, target: int) -> List[List[int]]:
+        def helper(node, target, path):
             if not node:
                 return
-            sum -= node.val
             path.append(node.val)
-            if not node.left and not node.right and sum == 0:
-                    res.append(list(path))
-            helper(node.left, res, sum, path)
-            helper(node.right, res, sum, path)
+            target -= node.val
+            if not node.left and not node.right and target==0:
+                self.res.append(path[:])  
+            helper(node.left, target, path)
+            helper(node.right, target, path)
             del path[-1]
-            
-        res = []
-        helper(root, res, sum, [])
-        return res
+        self.res = []
+        helper(root, target, [])
+        return self.res
