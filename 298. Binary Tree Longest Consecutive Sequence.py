@@ -9,22 +9,20 @@ The longest consecutive path need to be from parent to child (cannot be the reve
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def longestConsecutive(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-        def helper(node, count, val):
+class Solution:
+    def longestConsecutive(self, root: TreeNode) -> int:
+        def helper(node, val, count):
             if not node:    return
-            if node.val == val+1:
-                count += 1
-            else:
-                count = 1
-            self.res = max(self.res, count)
-            helper(node.left, count, node.val)
-            helper(node.right, count, node.val)
-    
+            if node:
+                if node.val==val+1:
+                    count+=1
+                else:
+                    count = 1
+                self.res = max(self.res, count)
+                helper(node.left, node.val, count)
+                helper(node.right, node.val, count)
+            return count
+        
         self.res = 0
-        helper(root, 0, 0)
+        helper(root, 0, 0)      
         return self.res
