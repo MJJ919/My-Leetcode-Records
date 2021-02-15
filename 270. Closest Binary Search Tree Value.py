@@ -17,28 +17,22 @@ Input: root = [4,2,5,1,3], target = 3.714286
 Output: 4
 '''
 '''
-Iteration.
-Time:O(k)
-Space:O(k)
+Time:O(n)
+Space:O(n)
 '''
-class Solution(object):
-    def closestValue(self, root, target):
-        """
-        :type root: TreeNode
-        :type target: float
-        :rtype: int
-        """
-        s, pre = [], float('-inf')
-        while s or root:
-            while root:
-                s.append(root)
-                root = root.left
-            node = s.pop()
-            if node.val > target and pre <= target:
-                return min(node.val, pre, key = lambda x:abs(target-x))
-            pre = node.val
-            root = node.right
-        return pre
+class Solution:
+    def closestValue(self, root: TreeNode, target: float) -> int:
+        def helper(node):
+            if not node:
+                return
+            if abs(node.val-target)<abs(self.res-target):
+                self.res = node.val
+            helper(node.left)
+            helper(node.right)
+        
+        self.res = float('inf')
+        helper(root)
+        return self.res
  
 '''
 Time:O(h)
