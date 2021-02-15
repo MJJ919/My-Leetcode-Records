@@ -15,16 +15,17 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        i, j = m-1, n-1
-        for p in range(m+n-1, -1, -1):
-            if j<0:
-                break
-            if nums1[i]>nums2[j] and i>= 0:
-                nums1[p] = nums1[i]
-                i -= 1
+        p = len(nums1)-1
+        while m>0 and n>0:
+            if nums2[n-1] > nums1[m-1]:
+                nums1[p] = nums2[n-1]
+                n -= 1
             else:
-                nums1[p] = nums2[j]
-                j -= 1
+                nums1[p] = nums1[m-1]
+                m -= 1
+            p -= 1
+        if n!=0:
+            nums1[:n] = nums2[:n]
             
 '''
 Time:O(nlgn)
