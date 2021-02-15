@@ -19,27 +19,20 @@ Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of 
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def lowestCommonAncestor(self, root, p, q):
-        """
-        :type root: TreeNode
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: TreeNode
-        """
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         self.res = None
-        
-        def find( node):
-            if not node:    return False
-            left = find(node.left)
-            right = find(node.right)
-            mid = (node == p or node == q)
-            if mid + left + right >=2:
-                self.ans = node
-            return mid or left or right
-        
-        find(root)
-        return self.ans
+        def helper(node):
+            if not node:
+                return False
+            left = helper(node.left)
+            right = helper(node.right)
+            mid = (node==p) or (node==q)
+            if mid+left+right>=2:
+                self.res = node
+            return left or right or mid
+        helper(root)
+        return self.res
 
 '''
 Time:O(n)
