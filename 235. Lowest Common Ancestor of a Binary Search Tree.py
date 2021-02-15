@@ -21,12 +21,6 @@ Space:O(n)
 '''
 class Solution(object):
     def lowestCommonAncestor(self, root, p, q):
-        """
-        :type root: TreeNode
-        :type p: TreeNode
-        :type q: TreeNode
-        :rtype: TreeNode
-        """
         parent = root.val
         if p.val > parent and q.val > parent:
             return self.lowestCommonAncestor(root.right, p, q)
