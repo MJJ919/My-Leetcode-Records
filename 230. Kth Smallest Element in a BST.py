@@ -25,20 +25,17 @@ Output: 3
 Time:O(n)
 Space:O(k)
 '''
-class Solution(object):
-    def kthSmallest(self, root, k):
-        """
-        :type root: TreeNode
-        :type k: int
-        :rtype: int
-        """
-        res, s = [], []
+class Solution:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        nums = []
+        stack = []
+        s = 1
         while True:
             while root:
-                s.append(root)
+                stack.append(root)
                 root = root.left
-            if k<=len(res):
-                return res[k-1]
-            node = s.pop()
-            res.append(node.val)
-            root = node.right
+            if k<=len(nums):
+                return nums[k-1]
+            root = stack.pop()
+            nums.append(root.val)
+            root = root.right
