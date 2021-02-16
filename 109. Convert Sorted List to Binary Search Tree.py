@@ -12,31 +12,19 @@ Explanation: One possible answer is [0,-3,9,-10,null,5], which represents the sh
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def sortedListToBST(self, head):
-        """
-        :type head: ListNode
-        :rtype: TreeNode
-        """
-        l = self.values(head)
-        
-        def buildtree(i, j):
-            if i>j:
-                return None
-            mid = (i+j)//2
-            node = TreeNode(l[mid])
-            
-            if i == j:
-                return node
-            node.left = buildtree(i, mid-1)
-            node.right = buildtree(mid+1, j)
-            return node
-        
-        return buildtree(0, len(l)-1)
-        
-    def values(self, head):
-        l = []
+class Solution:
+    def sortedListToBST(self, head: ListNode) -> TreeNode:
+        nums = []
         while head:
-            l.append(head.val)
+            nums.append(head.val)
             head = head.next
-        return l
+        
+        def helper(left, right):
+            if left>right:
+                return None
+            mid = (left+right)//2
+            root = TreeNode(nums[mid])
+            root.left = helper(left, mid-1)
+            root.right = helper(mid+1, right)
+            return root
+        return helper(0, len(nums)-1)
