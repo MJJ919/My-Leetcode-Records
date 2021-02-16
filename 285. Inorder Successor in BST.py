@@ -18,21 +18,21 @@ Iteration
 Time:O(h)
 Space:O(h)
 '''
-class Solution(object):
-    def inorderSuccessor(self, root, p):
-        s, inorder = [], float('-inf')
+class Solution:
+    def inorderSuccessor(self, root: 'TreeNode', p: 'TreeNode') -> 'TreeNode':
+        pre = float('inf')
+        stack = []
         while True:
             while root:
-                s.append(root)
+                stack.append(root)
                 root = root.left
-            if not s:
+            if not stack:
                 break
-            node = s.pop()
-            if p.val == inorder:
-                return node
-            inorder = node.val
-            root = node.right
-       
+            root = stack.pop()
+            if pre == p.val:
+                return root
+            pre = root.val
+            root = root.right
         return None
         
 '''
