@@ -36,9 +36,10 @@ class Solution(object):
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def connect(self, root):
-        if not root:    return root
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return root
         leftone = root
         while leftone.left:
             head = leftone
