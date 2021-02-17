@@ -38,16 +38,15 @@ class Solution:
         return res
     
 class Solution(object):
-    def lengthOfLongestSubstring(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        n = len(s)
         d = {}
-        i, res = 0, 0
+        res = 0
+        i = 0
         for j in range(len(s)):
             if s[j] in d:
-                i = max(d[s[j]],i)
+                i = max(d[s[j]], i)
             res = max(res, j-i+1)
             d[s[j]] = j+1
         return res
