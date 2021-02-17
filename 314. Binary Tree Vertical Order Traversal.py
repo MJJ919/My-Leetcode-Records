@@ -23,25 +23,25 @@ Output:
   [7]
 ]
 '''
+Time:O(nlgn)
+Space:O(n)
 '''
 Time:O(nlgn)  #We use sorted() function here.
 Space:O(n)
 '''
-class Solution(object):
-    def verticalOrder(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[List[int]]
-        """
+class Solution:
+    def verticalOrder(self, root: TreeNode) -> List[List[int]]:
+        if not root:    return []
         d = defaultdict(list)
         q = deque([(root, 0)])
         while q:
-            node, column = q.popleft()
-            if node is not None:
-                d[column].append(node.val)
-                q.append((node.left, column-1))
-                q.append((node.right, column+1))
-        return [d[x] for x in sorted(d.keys())]
+            node, width = q.popleft()
+            if node:
+                d[width].append(node.val)
+                q.append((node.left, width-1))
+                q.append((node.right, width+1))
+            
+        return (d[i] for i in sorted(d))
 
 '''
 DFS
