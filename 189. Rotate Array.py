@@ -53,14 +53,16 @@ class Solution(object):
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def rotate(self, nums, k):
-        n = len(nums)
-        k %= n
-        def inverse(nums,i,j):
-            while i<j:
-                nums[i],nums[j]=nums[j],nums[i]
-                i,j=i+1,j-1
-        inverse(nums,0,n-1)
-        inverse(nums,0,k-1)
-        inverse(nums,k,n-1)
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        k = k%len(nums)
+        def reverse(i, j):
+            while i<=j:
+                nums[i], nums[j] = nums[j], nums[i]
+                i, j = i+1, j-1
+        reverse(0, len(nums)-1)
+        reverse(0, k-1)
+        reverse(k,len(nums)-1)
