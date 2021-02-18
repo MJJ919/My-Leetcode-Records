@@ -21,32 +21,21 @@ Output
 Time:O(1)
 Space:O(n)
 '''
-from collections import OrderedDict
-class LRUCache(OrderedDict):
-    def __init__(self, capacity):
-        """
-        :type capacity: int
-        """
-        self.capacity = capacity
+class LRUCache:
 
-    def get(self, key):
-        """
-        :type key: int
-        :rtype: int
-        """
-        if key not in self:
-            return -1
-        self.move_to_end(key)
-        return self[key]
+    def __init__(self, capacity: int):
+        self.cap = capacity
+        self.q = OrderedDict()
 
-    def put(self, key, value):
-        """
-        :type key: int
-        :type value: int
-        :rtype: None
-        """
-        if key in self:
-            self.move_to_end(key)
-        self[key] = value
-        if len(self)>self.capacity:
-            self.popitem(last = False)
+    def get(self, key: int) -> int:
+        if key in self.q:
+            self.q.move_to_end(key)
+            return self.q[key]
+        return -1
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.q:
+            self.q.move_to_end(key)
+        self.q[key] = value
+        if len(self.q)>self.cap:
+            self.q.popitem(last=False)
