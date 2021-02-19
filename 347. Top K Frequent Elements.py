@@ -11,6 +11,22 @@ Input: nums = [1], k = 1
 Output: [1]
 '''
 '''
+Time:O(n)
+Space:O(n)
+'''
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        bucket = [[] for _ in range(len(nums)+1)]
+        counter = Counter(nums)
+        for num, freq in counter.items():
+            bucket[freq].append(num)
+        l = []
+        for bt in bucket:
+            if bt:
+                for num in bt:
+                    l.append(num)
+        return l[-k:]
+'''
 Time:O(Nlogk)
 Space:O(N+k)
 '''
