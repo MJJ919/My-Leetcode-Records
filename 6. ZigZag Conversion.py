@@ -19,35 +19,16 @@ Y A   H R
 P     I
 '''
 '''
-Time:O(n**2)
-Space:O(1)
+Time:O(n)
+Space:O(n)
 '''
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
-        if numRows == 1:
-            return s
-        n = 2*numRows - 2
-        res = []
+        n = 2*numRows-2
+        res = ''
         for i in range(numRows):
             for j in range(0, len(s)-i, n):
-                res.append(s[j+i])
+                res += s[j+i]
                 if i!=0 and i!=numRows-1 and j+n-i<len(s):
-                    res.append(s[j+n-i])
-        return ''.join(res)
-        
-'''
-Time:O(n)
-Space:O(1)
-'''
-class Solution:
-    def convert(self, s: str, numRows: int) -> str:
-        if numRows == 1 or len(s) < numRows:
-            return s
-        res = ['']*numRows
-        index, flag = 0, 1
-        for i in s:
-            res[index] += i
-            if index == 0:   flag = 1
-            if index == numRows-1:   flag = -1
-            index = index + flag
-        return ''.join(i for i in res)
+                    res += s[j+n-i]
+        return res
