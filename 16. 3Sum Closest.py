@@ -6,25 +6,22 @@ Return the sum of the three integers. You may assume that each input would have 
 Time:O(n**2)
 Space:O(1)
 '''
-class Solution(object):
-    def threeSumClosest(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-        m = float('inf')
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        curmin = float('inf')
+        res = 0
         nums.sort()
-        for n in range(len(nums)):
-            i, j = n+1, len(nums)-1
-            while i<j:
-                s = nums[n]+nums[i]+nums[j]
-                if abs(target-s)<abs(m):
-                    m = target - s
+        for i in range(len(nums)-2):
+            lo, hi = i+1, len(nums)-1
+            while lo<hi:
+                s = nums[i]+nums[lo]+nums[hi]
+                if abs(s-target)<curmin:
+                    curmin = abs(target-s)
+                    res = s
                 if s>target:
-                    j -= 1
+                    hi -= 1
+                elif s<target:
+                    lo += 1
                 else:
-                    i += 1
-            if m == 0:
-                break
-        return target - m
+                    return res
+        return res
