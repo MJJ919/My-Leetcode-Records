@@ -29,16 +29,19 @@ class Solution(object):
             else:
                 break
         return prefix
-
+    
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-        if not strs:    return ""
-        strs = sorted(strs, key = lambda x:len(x))
-        n = strs[0]
-        for i in strs[1:]:
-            j = 0
-            while j<len(n) and n[j]==i[j]:
-                j += 1
-            n = n[:j]
-            if not n:   return ""
-        return n 
+        if not strs:
+            return ""
+        string = min(strs, key = len)
+        for str in strs:
+            i = 0
+            while i<len(string):
+                if string[i]!=str[i]:
+                    break
+                else:
+                    i += 1
+            string = string[:i]
+            if not string:  return ""            
+        return string
