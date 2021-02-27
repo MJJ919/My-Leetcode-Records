@@ -31,10 +31,10 @@ class Solution:
         res = 0
         i = 0
         while i<len(s):
-            if i < len(s)-1 and d[s[i]]<d[s[i+1]]:
-                res += d[s[i+1]]-d[s[i]]
-                i += 2
-            else:
+            if i==len(s)-1 or d[s[i]]>=d[s[i+1]]:
                 res += d[s[i]]
                 i += 1
+            else:
+                res += d[s[i+1]]-d[s[i]]
+                i += 2
         return res
