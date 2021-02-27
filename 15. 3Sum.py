@@ -18,31 +18,32 @@ Output: []
 '''
 Method below uses twosum.
 Time:O(n**2)
-Space:O(logn) to log(n)
+Space:O(logn) to O(n)
 '''
-class Solution(object):
-    def threeSum(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        res = []
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
         nums.sort()
-        for i in range(len(nums)):
+        res = []
+        if not nums:
+            return res
+        
+        def find(i):
+            lo, hi = i+1, len(nums)-1
+            while lo<hi:
+                s = nums[i]+nums[lo]+nums[hi]
+                if s<0:
+                    lo += 1 
+                elif s>0:
+                    hi -= 1
+                else:
+                    res.append([nums[lo], nums[hi], nums[i]])
+                    lo, hi = lo+1, hi-1
+                    while lo<hi and nums[lo-1]==nums[lo]:
+                        lo += 1
+                    
+        for i in range(len(nums)-2):
             if nums[i]>0:
                 break
-            if i==0 or nums[i] != nums[i-1]:
-                self.sum(nums, i, res)
+            if i==0 or nums[i-1]!=nums[i]:
+                find(i)
         return res
-        
-    def sum(self, nums, i, res):
-        seen = set()
-        j = i+1            
-        while j<len(nums):
-            comp = -nums[i]-nums[j]
-            if comp in seen:
-                res.append([comp, nums[i], nums[j]])
-                while j+1 < len(nums) and nums[j] == nums[j+1]:
-                    j += 1
-            seen.add(nums[j])
-            j += 1
