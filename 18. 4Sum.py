@@ -17,11 +17,6 @@ Space:O(1)
 '''
 class Solution(object):
     def fourSum(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[List[int]]
-        """
         out, res = [], []
         nums.sort()
         for i in range(len(nums)-3):
@@ -39,4 +34,29 @@ class Solution(object):
         for i in out:
             if i not in res:
                 res.append(i)
+        return res
+
+    
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        nums.sort()
+        res = []
+        seen = set()
+        if not nums:    return res
+        for i in range(len(nums)-3):
+            for j in range(i+1, len(nums)-2):
+                comp = target-nums[i]-nums[j]
+                lo, hi = j+1, len(nums)-1
+                while lo<hi:
+                    if nums[lo]+nums[hi]==comp:
+                        l = sorted([nums[i], nums[j], nums[lo], nums[hi]])
+                        if tuple(l) not in seen:
+                            seen.add(tuple(l))
+                            res.append([nums[i], nums[j], nums[lo], nums[hi]])
+                        lo += 1
+                        hi -= 1
+                    elif nums[lo]+nums[hi]<comp:
+                        lo += 1
+                    else:
+                        hi -= 1
         return res
