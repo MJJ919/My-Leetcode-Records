@@ -30,16 +30,15 @@ class Solution:
     def closestCost(self, baseCosts: List[int], toppingCosts: List[int], target: int) -> int:
         toppingCosts.sort()
         self.res = float('inf')
-        
-        def dfs(total, toppingCosts):
-            if abs(total-target)<abs(self.res-target):
-                self.res = total
-            if total>target:    return
-            for i in range(len(toppingCosts)):
-                dfs(total+0*toppingCosts[i], toppingCosts[i+1:])
-                dfs(total+1*toppingCosts[i], toppingCosts[i+1:])
-                dfs(total+2*toppingCosts[i], toppingCosts[i+1:])
-        
         for base in baseCosts:
-            dfs(base, toppingCosts)
+            self.dfs(base, target, toppingCosts)
         return self.res
+
+    def dfs(self, total, target, toppingCosts):
+        if abs(total-target)<abs(self.res-target):
+            self.res = total
+        if total>target:    return
+        if not toppingCosts:    return
+        self.dfs(total+0*toppingCosts[0], target, toppingCosts[1:])
+        self.dfs(total+1*toppingCosts[0], target, toppingCosts[1:])
+        self.dfs(total+2*toppingCosts[0], target, toppingCosts[1:])
