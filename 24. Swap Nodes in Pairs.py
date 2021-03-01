@@ -20,20 +20,16 @@ Output: [1]
 Time: O(n)
 Space: O(1)
 '''
-class Solution(object):
-    def swapPairs(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
-        dummy = ListNode(-1)
+class Solution:
+    def swapPairs(self, head: ListNode) -> ListNode:
+        dummy = ListNode(0)
         dummy.next = head
         pre = dummy
         while head and head.next:
-            first, second = head, head.next
-            pre.next, second.next, first.next = second, first, second.next
-            pre = first
-            head = first.next
+            fir, sec = head, head.next
+            pre.next, fir.next, sec.next = sec, sec.next, fir
+            pre = fir
+            head = fir.next
         return dummy.next
     
 '''
