@@ -21,8 +21,8 @@ Constraints:
 1 <= target <= 30
 '''
 '''
-Time:O()
-Space:O()
+Time:O(2**n)
+Space:O(n)
 '''
 class Solution:
     def combinationSum2(self, nums: List[int], target: int) -> List[List[int]]:
@@ -43,4 +43,24 @@ class Solution:
         nums = [(num, nums[num])for num in nums]
         print(nums)
         back([], 0, nums, target)
+        return res
+
+       
+class Solution:
+    def combinationSum2(self, c: List[int], target: int) -> List[List[int]]:
+        c.sort()
+        res = []
+        def back(path, target, c):
+            if target==0 and path not in res:                
+                res.append(path[:])
+                return 
+            if target<0:
+                return
+            for i in range(len(c)):
+                if i>0 and c[i]==c[i-1]:
+                    continue
+                path.append(c[i])
+                back(path, target-c[i], c[i+1:])
+                path.pop()
+        back([], target, c)
         return res
