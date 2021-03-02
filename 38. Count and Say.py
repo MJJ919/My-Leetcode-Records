@@ -26,19 +26,22 @@ countAndSay(4) = say "21" = one 2 + one 1 = "12" + "11" = "1211"
 Time:O(2**n)
 Space:O(2**(n-1))
 '''
-class Solution(object):
-    def countAndSay(self, n):
-        if n == 1:  return '1'
-        s = self.countAndSay(n-1)
-        i, j = 0, 0
-        res = ""
-        while i<len(s):
-            if i<len(s)-1 and s[i+1]==s[i]:
-                i += 1
-            else:
-                res += str(i-j+1) + str(s[i])
-                i, j = i+1, i+1
-        return res
+class Solution:
+    def countAndSay(self, n: int) -> str:
+        count = n
+        n = '1'
+        while count>1:
+            s = ''
+            i = j = 0
+            while i<len(n):
+                if i<len(n)-1 and n[i+1]==n[i]:
+                    i += 1
+                else:
+                    s += str(i-j+1)+str(n[i])
+                    i, j = i+1, i+1
+            n = s
+            count -= 1
+        return n
 
 class Solution:
     def countAndSay(self, n: int) -> str:
