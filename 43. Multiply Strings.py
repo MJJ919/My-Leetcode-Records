@@ -12,27 +12,20 @@ Input: num1 = "123", num2 = "456"
 Output: "56088"
 '''
 '''
-Time:
-Space:
+Time:O(n**2)
+Space:O(1)
 '''
-class Solution(object):
-    def multiply(self, num1, num2):
-        """
-        :type num1: str
-        :type num2: str
-        :rtype: str
-        """
-        product = [0]*(len(num1)+len(num2))
-        pos = len(product)-1
-        for i in reversed(num1):
-            p = pos
-            for j in reversed(num2):
-                product[p] += int(i)*int(j)
-                product[p-1] += product[p]/10
-                product[p] = product[p]%10
-                p -= 1
-            pos -= 1
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        n = len(num1)+len(num2)
+        res = [0 for _ in range(n)]
+        for idx1, ch1 in enumerate(reversed(num1)):
+            for idx2, ch2 in enumerate(reversed(num2)):
+                idx = n-1-idx1-idx2
+                res[idx] += int(ch1)*int(ch2)
+                res[idx-1] += res[idx]//10
+                res[idx] = res[idx]%10
         a = 0
-        while a<len(product)-1 and product[a]==0:
-                a += 1 
-        return ''.join(str(i) for i in product[a:])
+        while a<len(res)-1 and res[a]==0:
+            a += 1
+        return ''.join(str(i) for i in res[a:])
