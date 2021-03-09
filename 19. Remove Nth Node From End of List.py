@@ -44,14 +44,17 @@ class Solution(object):
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def removeNthFromEnd(self, head, n):
+class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
         dummy = ListNode(0)
         dummy.next = head
-        fir = sec = dummy
-        for i in range(n+1):
-            fir = fir.next
-        while fir:
-            fir, sec = fir.next, sec.next
-        sec.next = sec.next.next
+        p1 = dummy
+        p2 = dummy
+        while n>0:
+            p1 = p1.next
+            n -= 1
+        while p1.next:
+            p1 = p1.next
+            p2 = p2.next
+        p2.next = p2.next.next
         return dummy.next
