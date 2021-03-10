@@ -17,22 +17,22 @@ Time:O(n)
 Space:O(n)
 '''
 class Solution:
-    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
-        start, end = newInterval
-        idx, n = 0, len(intervals)
+    def insert(self, intervals: List[List[int]], new: List[int]) -> List[List[int]]:
         res = []
-        while idx<n and start>intervals[idx][0]:
-            res.append(intervals[idx])
-            idx += 1
+        start, end = new[0], new[1]
+        i = 0
+        while i<len(intervals) and intervals[i][0]<start:
+                res.append(intervals[i])
+                i += 1
         if not res or res[-1][1]<start:
-            res.append(newInterval)
+            res.append(new)
         else:
             res[-1][1] = max(res[-1][1], end)
-        while idx<n:
-            start, end = intervals[idx]
-            idx += 1
-            if start>res[-1][1]:
-                res.append([start,end])
+            
+        while i<len(intervals):
+            if res[-1][1]<intervals[i][0]:
+                res.append(intervals[i])
             else:
-                res[-1][1] = max(res[-1][1], end)
+                res[-1][1] = max(res[-1][1], intervals[i][1])
+            i += 1
         return res
