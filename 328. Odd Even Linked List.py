@@ -17,19 +17,16 @@ Output: 2->3->6->7->1->5->4->NULL
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def oddEvenList(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
-        if not head:    return 
+class Solution:
+    def oddEvenList(self, head: ListNode) -> ListNode:
+        if not head:
+            return
         odd = head
-        even, second = head.next, head.next
+        even = sec = head.next
         while odd.next and even.next:
             odd.next = odd.next.next
             odd = odd.next
             even.next = even.next.next
             even = even.next
-        odd.next = second
+        odd.next = sec
         return head
