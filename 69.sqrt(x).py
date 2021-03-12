@@ -9,20 +9,20 @@ Method below uses 2 pointers.
 Time:O(logN)
 Space:O(1)
 '''
-class Solution(object):
-    def mySqrt(self, x):
+class Solution:
+    def mySqrt(self, x: int) -> int:
         if x<2:
             return x
-        i,j = 0,x//2
-        while i <= j:
-            mid = (i+j)//2
-            if mid*mid > x:
-                j = mid-1
-            elif mid*mid < x:
-                i = mid+1
-            else:
+        left, right = 2, x//2
+        while left<=right:
+            mid = (left+right)//2
+            if mid*mid==x:
                 return mid
-        return j
+            elif mid*mid>x:
+                right = mid-1
+            else:
+                left = mid+1
+        return right
     
 '''
 This way is pretty dumb.
