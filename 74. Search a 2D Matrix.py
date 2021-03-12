@@ -37,3 +37,24 @@ class Solution:
             else:
                 m = mid+1
         return False
+
+'''
+Time:O(lg(mn))
+Space:O(1)
+'''
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        if matrix[-1][-1]<target:   return False
+        m, n = len(matrix), len(matrix[0])
+        
+        left, right = 0, m*n-1
+        while left<=right:
+            mid = (left+right)//2
+            col, row = mid//n, mid%n
+            if matrix[col][row]==target:
+                return True
+            elif matrix[col][row]>target:
+                right = mid-1
+            else:
+                left = mid+1
+        return False
