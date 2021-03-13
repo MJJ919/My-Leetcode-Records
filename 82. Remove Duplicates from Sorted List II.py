@@ -15,22 +15,17 @@ Output: 2->3
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def deleteDuplicates(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
-        dummy = ListNode(0)
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        dummy = ListNode('0')
         dummy.next = head
-        pre, cur = dummy, head
-        d = []
-        while cur:
-            if cur.next and cur.val == cur.next.val:
-                while cur.next and cur.val == cur.next.val:
-                    cur = cur.next
-                pre.next = cur.next
+        p = dummy; q = head
+        while q:
+            if q.next and q.next.val==q.val:
+                while q.next and q.next.val == q.val:
+                    q = q.next
+                p.next = q.next
             else:
-                pre = pre.next
-            cur = cur.next
+                p = p.next
+            q = q.next
         return dummy.next
