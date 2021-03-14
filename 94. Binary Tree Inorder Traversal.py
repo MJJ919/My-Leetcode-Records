@@ -29,15 +29,14 @@ Space:O(n)
 '''
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
-        visited = []
         res = []
-        while True:
-            while root:
-                visited.append(root)
-                root = root.left
-            if not visited:
-                return res
-            node = visited.pop()
+        visit = []
+        node = root
+        while node or visit:
+            while node:
+                visit.append(node)
+                node = node.left
+            node = visit.pop()
             res.append(node.val)
-            root = node.right
+            node = node.right
         return res
