@@ -11,22 +11,15 @@ Output: 1->4->3->2->5->NULL
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def reverseBetween(self, head, m, n):
-        """
-        :type head: ListNode
-        :type m: int
-        :type n: int
-        :rtype: ListNode
-        """
+class Solution:
+    def reverseBetween(self, head: ListNode, left: int, right: int) -> ListNode:
         dummy = ListNode(0)
         dummy.next = head
-        a = dummy
-        for i in range(m-1):
-            a = a.next
-        pre, cur = a.next, a.next.next
-        for i in range(m, n):
+        p = dummy
+        for _ in range(left-1):
+            p = p.next
+        pre, cur = p.next, p.next.next
+        for _ in range(right-left):
             cur.next, pre, cur = pre, cur, cur.next
-        a.next.next = cur
-        a.next = pre
+        p.next.next,p.next = cur, pre
         return dummy.next
