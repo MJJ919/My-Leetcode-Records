@@ -45,3 +45,26 @@ class Solution:
             r1, r2 = r1+1, r2-1
             c1, c2 = c1+1, c2-1
         return res
+
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        res = []
+        if not matrix or not matrix[0]: return res
+        left, right, up, down = 0, len(matrix[0])-1, 0, len(matrix)-1
+        while left<right and up<down:
+            for j in range(left, right):
+                res.append(matrix[up][j])
+            for i in range(up, down):
+                res.append(matrix[i][right])
+            for j in range(right, left, -1):
+                res.append(matrix[down][j])
+            for i in range(down, up, -1):
+                res.append(matrix[i][left])
+            left, right, up, down = left+1, right-1, up+1, down-1
+        if left==right:
+            for i in range(up, down+1):
+                res.append(matrix[i][left])
+        elif up==down:
+            for j in range(left, right+1):
+                res.append(matrix[up][j])
+        return res
