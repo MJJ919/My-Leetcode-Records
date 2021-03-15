@@ -19,24 +19,18 @@ return its level order traversal as:
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def levelOrder(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[List[int]]
-        """
-        levels = []
-        
-        def helper(node, level):
-            if node:
-                if len(levels) == level:
-                    levels.append([])
-                levels[level].append(node.val)
-                helper(node.left, level+1)
-                helper(node.right, level+1)
-        
-        helper(root, 0)
-        return levels
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        res = []
+        def traverse(node, level):
+            if not node:    return
+            if len(res)<=level:
+                res.append([])
+            res[level].append(node.val)
+            traverse(node.left, level+1)
+            traverse(node.right, level+1)
+        traverse(root, 0)
+        return res
 
 class Solution:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
