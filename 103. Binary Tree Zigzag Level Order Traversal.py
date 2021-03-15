@@ -22,53 +22,49 @@ BFS
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def zigzagLevelOrder(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[List[int]]
-        """
+class Solution:
+    def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
         if not root:
             return []
+        level = 0
         nextlevel = deque([root])
-        order = []
-        depth = 0
+        res = []
         
         while nextlevel:
-            order.append([])
-            curr = nextlevel
+            res.append([])
+            cur = nextlevel
             nextlevel = deque()
-            while curr:
-                node = curr.popleft()
-                order[depth].append(node.val)
+            while cur:
+                node = cur.popleft()
+                res[level].append(node.val)
                 if node.left:
                     nextlevel.append(node.left)
                 if node.right:
                     nextlevel.append(node.right)
-            if depth%2 == 1:
-                order[depth] = order[depth][::-1]
-            depth += 1
+            if level%2==1:
+                res[level] = res[level][::-1]
+            level += 1
             
-        return order
+        return res
         
 '''
 DFS
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def zigzagLevelOrder(self, root):
-        def helper(node, path, depth):
+class Solution:
+    def zigzagLevelOrder(self, root: TreeNode) -> List[List[int]]:
+        def traverse(node, level):
             if node:
-                if len(path) == depth:
-                    path.append(deque([]))
-                if depth%2 == 0:
-                    path[depth].append(node.val)
+                if len(res)<=level:
+                    res.append(deque())
+                if level%2==1:
+                    res[level].appendleft(node.val)
                 else:
-                    path[depth].appendleft(node.val)
-                helper(node.left, path, depth+1)
-                helper(node.right, path, depth+1)
+                    res[level].append(node.val)
+                traverse(node.left, level+1)
+                traverse(node.right, level+1)
         
-        path = []
-        helper(root, path, 0)
-        return path
+        res = []
+        traverse(root, 0)
+        return res
