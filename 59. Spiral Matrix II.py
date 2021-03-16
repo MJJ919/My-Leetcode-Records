@@ -12,24 +12,24 @@ Space:O(1)
 '''
 class Solution:
     def generateMatrix(self, n: int) -> List[List[int]]:
-        def spiral(r1,r2,c1,c2):
-            for c in range(c1, c2+1):
-                yield r1, c
-            for r in range(r1+1, r2+1):
-                yield r, c2
-            if r1<r2 and c1<c2:
-                for c in range(c2-1, c1-1,-1):
-                    yield r2, c
-                for r in range(r2-1,r1, -1):
-                    yield r, c1
-            
-        res = [[0for _ in range(n)]for _ in range(n)]
-        num = 1
-        r1, r2, c1, c2 = 0, n-1, 0, n-1
-        while r1<=r2 and c1<=c2:
-            for r, c in spiral(r1, r2, c1, c2):
-                res[r][c] = num
-                num += 1
-            r1+=1; r2-=1;
-            c1+=1; c2-=1;
-        return res
+        m = [[0 for _ in range(n)] for _ in range(n)]
+        left, right, up, down = 0, n - 1, 0, n - 1
+        count = 1
+        while left <= right and up <= down:
+            for j in range(left, right):
+                m[up][j] = count
+                count += 1
+            for i in range(up, down):
+                m[i][right] = count
+                count += 1
+            for j in range(right, left, -1):
+                m[down][j] = count
+                count += 1
+            for i in range(down, up, -1):
+                m[i][left] = count
+                count += 1
+            left, right, up, down = left + 1, right - 1, up + 1, down - 1
+        if n%2==1:
+            mid = n//2
+            m[mid][mid]=count
+        return m
