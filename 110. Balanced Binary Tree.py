@@ -8,18 +8,13 @@ a binary tree in which the left and right subtrees of every node differ in heigh
 Time:O(nlgn)
 Space:O(n)
 '''
-class Solution(object):
-    def isBalanced(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
-        if not root:    
-            return True
-        return abs(self.helper(root.left)-self.helper(root.right)) < 2 and self.isBalanced(root.right) and self.isBalanced(root.left)
-    
-    def helper(self, node):
+class Solution:
+    def isBalanced(self, root: TreeNode) -> bool:
+        def traverse(node):
             if not node:
                 return -1
-            else:   
-                return 1+max(self.helper(node.left),self.helper(node.right))
+            return 1+max(traverse(node.left), traverse(node.right))
+            
+        if not root:
+            return True
+        return abs(traverse(root.left)-traverse(root.right))<2 and self.isBalanced(root.left) and self.isBalanced(root.right)
