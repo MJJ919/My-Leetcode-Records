@@ -14,22 +14,46 @@ just like in Figure B. The serialized output is in level order as connected by t
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def connect(self, root):
-        """
-        :type root: Node
-        :rtype: Node
-        """
-        if not root:    return None
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if not root:
+            return root
         q = deque([root])
         while q:
-            i = len(q)
-            for k in range(i):
+            size = len(q)
+            for i in range(size):
                 node = q.popleft()
-                if k<i-1:
+                if i<size-1:
                     node.next = q[0]
                 if node.left:
                     q.append(node.left)
                 if node.right:
                     q.append(node.right)
+        return root
+    
+'''
+Time:O(n)
+Space:O(1)
+'''
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        def build(node, pre, leftmost):
+            if node:
+                if pre:
+                    pre.next = node
+                else:
+                    leftmost = node
+                pre = node
+            return pre, leftmost
+        
+        if not root:
+            return root
+        leftmost = root
+        while leftmost:
+            pre, cur = None, leftmost
+            leftmost = None
+            while cur:
+                pre, leftmost = build(cur.left, pre, leftmost)
+                pre, leftmost = build(cur.right, pre, leftmost)
+                cur = cur.next
         return root
