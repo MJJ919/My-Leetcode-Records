@@ -32,3 +32,22 @@ class Solution:
                 node.left = None
             return righttail if righttail else lefttail
         return helper(root)
+'''
+Time:O(n)
+Space:O(1)
+'''
+class Solution:
+    def flatten(self, root: TreeNode) -> None:
+t return anything, modify root in-place instead.
+        if not root:
+            return None
+        node = root
+        while node:
+            if node.left:
+                rightmost = node.left
+                while rightmost.right:
+                    rightmost = rightmost.right
+                rightmost.right = node.right
+                node.right = node.left
+                node.left = None
+            node = node.right
