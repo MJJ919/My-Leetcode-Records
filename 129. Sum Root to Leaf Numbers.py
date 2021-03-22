@@ -38,21 +38,25 @@ class Solution(object):
         res = []
         helper(root, '')
         return sum(int(i) for i in res)
-
+    
+'''
+Time:O(n)
+Space:O(H)
+'''
 class Solution:
     def sumNumbers(self, root: TreeNode) -> int:
         self.res = 0
-        def helper(node, num):
+        if not root:    return self.res
+        
+        def build(node, path):
             if not node.left and not node.right:
-                num += str(node.val)
-                self.res += int(num)
+                self.res += path*10+node.val
                 return
-            num += str(node.val)
             if node.left:
-                helper(node.left, num)
+                build(node.left, path*10+node.val)
             if node.right:
-                helper(node.right, num)
-        if not root:
-            return 0
-        helper(root, '')
+                build(node.right, path*10+node.val)
+            return 
+        
+        build(root, 0)
         return self.res
