@@ -24,21 +24,16 @@ Output: -1
 '''
 '''
 Time:O(n)
-Space:O91)
+Space:O(1)
 '''
-class Solution(object):
-    def canCompleteCircuit(self, gas, cost):
-        """
-        :type gas: List[int]
-        :type cost: List[int]
-        :rtype: int
-        """
-        tank,minimun,minindex = 0,gas[0]-cost[0],0
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        cur, total = 0, 0
+        start = 0
         for i in range(len(gas)):
-            tank += gas[i] - cost[i]
-            if minimun>tank:
-                minindex = i
-                minimun = tank
-        if tank<0:
-            return -1
-        return (minindex+1)%len(gas)
+            total += gas[i] - cost[i]
+            cur += gas[i] - cost[i]
+            if cur < 0:
+                start = i+1
+                cur = 0
+        return start if total>=0 else -1
