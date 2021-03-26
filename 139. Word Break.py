@@ -32,13 +32,19 @@ class Solution:
 '''
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        @lru_cache
-        def wordbreak(start):
-            if start==len(s):
-                return True
-            for end in range(start+1, len(s)+1):
-                if s[start:end] in words and wordbreak(end):
-                    return True
-            return False
         words = set(wordDict)
-        return wordbreak(0)
+        seen = set()
+        q = deque()
+        q.append(0)
+        
+        while q:
+            start = q.popleft()
+            if start in seen:
+                continue
+            for end in range(start+1, len(s)+1):
+                if s[start:end] in words:
+                    q.append(end)
+                    if end == len(s):
+                        return True
+                seen.add(start)
+        return False
