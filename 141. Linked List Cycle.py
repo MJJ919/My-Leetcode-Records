@@ -11,18 +11,17 @@ Return true if there is a cycle in the linked list. Otherwise, return false.
 Time:O(n)
 Space:O(1)
 '''
-class Solution(object):
-    def hasCycle(self, head):
-        """
-        :type head: ListNode
-        :rtype: bool
-        """
-        slow = fast = head
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        if not head:
+            return False
+        fast = head.next
+        slow = head
         while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
             if fast == slow:
                 return True
+            fast = fast.next.next
+            slow = slow.next
         return False
 
 '''
