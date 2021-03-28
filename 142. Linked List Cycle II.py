@@ -26,17 +26,39 @@ Explanation: There is no cycle in the linked list.
 Time:O(n)
 Space:O(n)
 '''
-class Solution(object):
-    def detectCycle(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
-        d = {}
+class Solution:
+    def detectCycle(self, head: ListNode) -> ListNode:
+        d = set()
         while head:
-            if head not in d:
-                d[head] = True
-                head = head.next
-            else:
+            if head in d:
                 return head
+            d.add(head)
+            head = head.next
         return None
+    
+'''
+Time:O(n)
+Space:O(1)
+'''
+class Solution:
+    def detectCycle(self, head: ListNode) -> ListNode:
+        if not head:
+            return None
+        
+        def getinter(head):
+            fast = slow = head
+            while fast and fast.next:
+                fast = fast.next.next
+                slow = slow.next
+                if slow == fast:
+                    return fast
+            return None
+          
+        intersection = getinter(head)
+        if not intersection:
+            return None
+        p = head
+        while p != intersection:
+            p = p.next
+            intersection = intersection.next
+        return p
