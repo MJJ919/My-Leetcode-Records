@@ -7,9 +7,7 @@ Space:O(n)
 '''
 class Solution:
     def evaluate(self, s: str, knowledge: List[List[str]]) -> str:
-        d = {}
-        for pair in knowledge:
-            d[pair[0]] = pair[1]
+        d = {key:value for key, value in knowledge}
         scan = ''
         res = ''
         flag = False
