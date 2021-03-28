@@ -29,13 +29,13 @@ Space:O(n)
 class Solution:
     def preorderTraversal(self, root: TreeNode) -> List[int]:
         res = []
-        visited = []
+        s = []
         while True:
             while root:
-                visited.append(root)
+                s.append(root)
                 res.append(root.val)
                 root = root.left
-            if not visited:
+            if not s:
                 return res
-            node = visited.pop()
-            root = node.right
+            root = s.pop().right
+        return res
