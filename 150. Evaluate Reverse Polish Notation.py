@@ -35,3 +35,33 @@ class Solution:
             else:
                 s.append(i)
         return s.pop()
+
+'''
+Time:O(n**2)
+Space:O(1)
+'''
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        def operation(token, num1, num2):
+            if token == '+':
+                return num1 + num2
+            elif token == '-':
+                return num1 - num2
+            elif token == '*':
+                return num1 * num2
+            else:
+                return int(num1 / num2)
+        cur = 0
+        length = len(tokens)
+        while length>1:
+            while tokens[cur] not in "+-*/":
+                cur += 1
+            num1 = int(tokens[cur-2])
+            num2 = int(tokens[cur-1])
+            res = operation(tokens[cur], num1, num2)
+            tokens[cur] = res
+            tokens.pop(cur-1)
+            tokens.pop(cur-2)
+            cur -= 1
+            length -= 2
+        return tokens[0]
