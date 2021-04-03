@@ -29,6 +29,4 @@ class Solution:
             if s1[i] != s2[i]:
                 break
             i += 1
-        if len(s2)==i:  
-            return True
         return(s2[i:] == s1[j-len(s2)+i:])
