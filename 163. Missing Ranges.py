@@ -38,21 +38,16 @@ class Solution(object):
         else:
             res.append(str(start+1)+"->"+str(end-1))
 
+          
 class Solution:
     def findMissingRanges(self, nums: List[int], lower: int, upper: int) -> List[str]:
         res = []
-        if not nums:
-            if lower==upper:    res.append(str(lower))
-            else:   res.append(str(lower)+'->'+str(upper))
-            return res
-        if lower != nums[0]:    nums = [lower-1] + nums
-        if upper != nums[-1]:   nums = nums + [upper+1]
-        print(nums)
+        nums = [lower-1] + nums + [upper+1]
         for i in range(1, len(nums)):
-            string = ''
-            if nums[i]==nums[i-1]+2:
-                string+=str(nums[i-1]+1)
-            elif nums[i]>nums[i-1]+2:
-                string+= str(nums[i-1]+1)+'->'+str(nums[i]-1)
-            if string:  res.append(string)
-        return res    
+            if nums[i]>nums[i-1]+1:
+                if nums[i] == nums[i-1]+2:
+                    res.append(str(nums[i-1]+1))
+                else:
+                    s = str(nums[i-1]+1) + '->'+ str(nums[i]-1)
+                    res.append(s)
+        return res
