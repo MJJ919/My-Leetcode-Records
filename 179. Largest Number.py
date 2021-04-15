@@ -19,33 +19,28 @@ Example 4:
 Input: nums = [10]
 Output: "10"
 '''
-class Solution:
-    def largestNumber(self, nums: List[int]) -> str:
-        def mergesort(nums, i, j):
-            if i>j:
-                return 
-            if i == j:
-                return [nums[i]]
-            mid = (i+j)//2
-            left = mergesort(nums, i, mid)
-            right = mergesort(nums, mid+1, j)
-            return merge(left, right)
-            
-        def merge(l1, l2):
-            res = []
-            i, j = 0, 0
-            while i<len(l1) and j<len(l2):
-                if str(l1[i])+str(l2[j])>str(l2[j])+str(l1[i]):
-                    res.append(l1[i])
-                    i += 1
-                else:
-                    res.append(l2[j])
-                    j += 1
-            res += l1[i:] or l2[j:]
-            return res
-            
-        nums = mergesort(nums, 0, len(nums)-1)
-        return str(int(''.join(str(i) for i in nums)))        
+class Solution {
+    public class compare implements Comparator<String>{
+        public int compare(String a, String b){
+            String order1 = a+b;
+            String order2 = b+a;
+            return order2.compareTo(order1);
+        }
+    }
+    public String largestNumber(int[] nums) {
+        String[] strnums = new String[nums.length];
+        for(int i=0; i<nums.length; i++){
+            strnums[i] = String.valueOf(nums[i]);
+        }
+        Arrays.sort(strnums, new compare());
+        if (strnums[0].equals("0"))  return "0";
+        String res = new String();
+        for (String num: strnums){
+            res += num;
+        }
+        return res;
+    }
+}  
     
 '''
 Time:O(nlgn)
