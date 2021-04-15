@@ -27,3 +27,18 @@ class Solution:
                 end += 1
             reverse(s, start, end-1)
             start, end = end+1, end+1
+
+class Solution:
+    def reverseWords(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        s.reverse()
+        i = 0
+        j = 0
+        while i<len(s):
+            if s[i] == ' ':
+                s[j:i] = s[j:i][::-1]
+                j = i+1
+            i += 1
+        s[j:i] = s[j:i][::-1]
