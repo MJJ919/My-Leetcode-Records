@@ -28,3 +28,29 @@ class Solution:
             root.right = helper(mid+1, right)
             return root
         return helper(0, len(nums)-1)
+    
+'''
+Time:O(nlgn)
+Space:O(nlgn)
+'''
+class Solution:
+    def findmid(self, head):
+        fast = slow = head
+        prev = None
+        while fast and fast.next:
+            prev = slow
+            slow = slow.next
+            fast = fast.next.next
+        if prev:
+            prev.next = None
+        return slow
+        
+    def sortedListToBST(self, head: ListNode) -> TreeNode:
+        if not head:    return None
+        mid = self.findmid(head)
+        root = TreeNode(mid.val)
+        if head==mid:
+            return root
+        root.left = self.sortedListToBST(head)
+        root.right = self.sortedListToBST(mid.next)
+        return root
