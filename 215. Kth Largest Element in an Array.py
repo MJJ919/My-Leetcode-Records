@@ -12,6 +12,43 @@ Output: 4
 
 '''
 '''
+Time:O(n) for average. O(n*n) for the worst.
+Space:O(1)
+'''
+'''
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        divide(nums, 0, nums.length-1, k);
+        return nums[nums.length-k];
+    }
+    
+    private void divide(int[] nums, int i, int j, int k){
+        if (j<i)    return;
+        int pos = conquer(nums, i, j);
+        if (pos == nums.length-k)   return;
+        else if (pos > nums.length-k)  divide(nums, i, pos-1, k);
+        else    divide(nums, pos+1, j, k);
+    }
+    
+    private int conquer(int[] nums, int i, int j){
+        int wall = i;
+        int mark = nums[j];
+        for (int pos=i; pos<j; pos++){
+            if (nums[pos]<mark) swap(nums, pos, wall++);
+        }
+        swap(nums, wall, j);
+        return wall;
+    }
+    
+    private void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}
+'''
+
+'''
 Time:O(nlgk)
 Space:O(k)
 '''
