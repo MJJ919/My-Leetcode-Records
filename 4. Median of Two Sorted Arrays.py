@@ -8,14 +8,28 @@ Output: 2.00000
 Explanation: merged array = [1,2,3] and median is 2.
 '''
 '''
-Time:O(nlgn)
-Space:O(n)
+Time:O(lgn)
+Space:O(1)
 '''
 class Solution:
-    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        num = sorted(nums1 + nums2)
-        length = len(num)
-        if length%2 == 1:
-            return num[length//2]
-        else:
-            return (num[length//2] + num[length//2-1])/2
+    def findMedianSortedArrays(self, n1: List[int], n2: List[int]) -> float:
+        if len(n1)>len(n2):
+            return self.findMedianSortedArrays(n2, n1)
+        left, right = 0, len(n1)
+        while left<=right:
+            x = left + (right-left)//2
+            y = (len(n1)+len(n2)+1)//2 - x
+            xl = n1[x-1] if x!=0 else float('-inf')
+            xr = n1[x] if x!=len(n1) else float('inf')
+            yl = n2[y-1] if y!=0 else float('-inf')
+            yr = n2[y] if y!=len(n2) else float('inf')
+            if xl<=yr and yl<=xr:
+                if (len(n1)+len(n2))%2==0:
+                    return (max(xl,yl)+min(xr,yr))/2.0
+                else:
+                    return max(xl, yl)
+            elif xl>yr:
+                right = x-1
+            else:
+                left = x+1
+        return -1            
