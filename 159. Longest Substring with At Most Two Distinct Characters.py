@@ -20,15 +20,19 @@ class Solution:
     def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
         if len(s)<3:
             return len(s)
-        seen = defaultdict(int)
+        d = dict()
         res = 0
-        i, j = 0, 0
-        while j<len(s):
-            seen[s[j]] = j
-            if len(seen)>2:
-                del_idx = min(seen.values())
-                del seen[s[del_idx]]
-                i = del_idx+1
-            res = max(res, j-i+1)
-            j += 1
+        left = 0
+        for i in range(len(s)):
+            char = s[i]
+            if char in d:
+                d[char] += 1
+            else:
+                d[char] = 1
+            while len(d)>2:
+                d[s[left]] -= 1
+                if d[s[left]]==0:
+                    del d[s[left]]
+                left += 1
+            res = max(res, i-left+1)
         return res
