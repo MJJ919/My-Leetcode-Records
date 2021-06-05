@@ -16,8 +16,36 @@ Output: true
 Explanation: One possible way is : left -> down -> left -> down -> right -> down -> right.
 '''
 '''
+BFS
 Time:O(mn)
-Space:O(n)
+Space:O(mn)
+'''
+class Solution:
+    def hasPath(self, maze: List[List[int]], start: List[int], destination: List[int]) -> bool:
+        s = deque()
+        s.append(start)
+        seen = set()
+        seen.add((start[0], start[1]))
+        move = ((1, 0), (-1, 0), (0, 1), (0, -1))
+        while s:
+            for _ in range(len(s)):
+                node = s.popleft()
+                row, col = node[0], node[1]
+                if node == destination:
+                    return True
+                for i, j in move:
+                    r, c = row, col
+                    while r+i>=0 and r+i<len(maze) and c+j>=0 and c+j<len(maze[0]) and maze[r+i][c+j]!=1:
+                        r, c = r+i, c+j
+                    if (r, c) not in seen:
+                        s.append([r, c])
+                        seen.add((r, c))
+        return False
+                    
+'''
+DFS
+Time:O(mn)
+Space:O(mn)
 '''
 class Solution:
     def hasPath(self, maze: List[List[int]], start: List[int], destination: List[int]) -> bool:
