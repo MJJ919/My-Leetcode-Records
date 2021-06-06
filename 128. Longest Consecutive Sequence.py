@@ -14,19 +14,17 @@ Space:O(n)
 '''
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        long = 0
-        numset = set(nums)
-        
-        for num in nums:
-            if num-1 not in numset:
-                curnum = num
-                curlong = 1
-                
-                while curnum+1 in numset:
-                    curnum += 1
-                    curlong += 1
-                long = max(long, curlong)
-        return long
+        n = set(nums)
+        res = 0
+        for num in n:
+            if num-1 not in n:
+                cur = num
+                count = 1
+                while cur+1 in n:
+                    cur += 1
+                    count += 1
+                res = max(count, res)
+        return res
         
 '''
 Time:O(nlgn)
