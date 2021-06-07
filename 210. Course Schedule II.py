@@ -15,31 +15,24 @@ Time:O(E+V)
 Space:O(E+V)
 '''
 class Solution:
-    white = 1
-    gray = 2
-    black = 3
-    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        adj = defaultdict(list)
-        for cur, pre in prerequisites:
-            adj[pre].append(cur)
-        order = []
-        self.ispossible = True
-        color = {k:Solution.white for k in range(numCourses)}
-        
-        def dfs(node):
-            if not self.ispossible:
-                return
-            color[node] = Solution.gray
-            if node in adj:
-                for neighbor in adj[node]:
-                    if color[neighbor]==Solution.white:
-                        dfs(neighbor)
-                    elif color[neighbor]==Solution.gray:
-                        self.ispossible = False
-            color[node] = Solution.black
-            order.append(node)
-            
-        for node in range(numCourses):
-            if color[node] == Solution.white:
-                dfs(node)
-        return order[::-1] if self.ispossible else []
+    def findOrder(self, num: int, pre: List[List[int]]) -> List[int]:
+        d = defaultdict(list)
+        res = []
+        count = 0
+        q = deque()
+        memo = [0 for _ in range(num)]
+        for i in range(len(pre)):
+            d[pre[i][1]].append(pre[i][0])
+            memo[pre[i][0]] += 1
+        for i in range(num):
+            if memo[i] == 0:
+                q.append(i)
+        while q:
+            cur = q.popleft()
+            count += 1
+            res.append(cur)
+            for c in d[cur]:
+                memo[c] -= 1
+                if memo[c]==0:
+                    q.append(c)
+        return res if count==num else []
