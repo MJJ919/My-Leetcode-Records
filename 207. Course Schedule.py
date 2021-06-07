@@ -15,24 +15,20 @@ To take course 1 you should have finished course 0. So it is possible.
 class Solution:
     def canFinish(self, num: int, pre: List[List[int]]) -> bool:
         d = defaultdict(list)
-        for [i,j] in pre:
-            d[j].append(i)
-        path = [False]*num
-        checked = [False]*num
-        
-        def isCyclic(cur, path, checked):
-            if checked[cur]:    return False
-            if path[cur]:   return True
-            path[cur] = True
-            ret = False
-            for pre in d[cur]:
-                ret = isCyclic(pre, path, checked)
-                if ret: break
-            path[cur] = False
-            checked[cur] = True
-            return ret
-                
-        for cur in range(num):
-            if isCyclic(cur, path, checked):
-                return False
-        return True
+        memo = [0 for _ in range(num)]
+        q = deque()
+        count = 0
+        for i in range(len(pre)):
+            d[pre[i][1]].append(pre[i][0])
+            memo[pre[i][0]] += 1
+        for i in range(num):
+            if memo[i]==0:
+                q.append(i)
+        while q:
+            cur = q.popleft()
+            count += 1
+            for c in d[cur]:
+                memo[c] -= 1
+                if memo[c]==0:
+                    q.append(c)
+        return count==num
