@@ -38,10 +38,19 @@ class Solution:
 Time:O(h)
 Space:O(1)
 '''
-class Solution(object):
-    def closestValue(self, root, target):
-        closest = root.val
-        while root:
-            closest = min(closest, root.val, key = lambda x: abs(x - target))
-            root = root.left if target < root.val else root.right
-        return closest
+class Solution:
+    def closestValue(self, root: TreeNode, target: float) -> int:
+        node = root
+        res = 0
+        dis = float('inf')
+        while node:
+            if not node:
+                return
+            if abs(node.val-target)<dis:
+                res = node.val
+                dis = abs(node.val-target)
+            if node.val>target:
+                node = node.left
+            else:
+                node = node.right
+        return res
