@@ -11,7 +11,7 @@ sumRange(0, 2) -> 8
 '''
 '''
 Time:O(n)
-Space:O(1)
+Space:O(sqrt(n))
 '''
 class NumArray:
 
