@@ -17,12 +17,29 @@ class NumArray:
 
     def __init__(self, nums: List[int]):
         self.nums = nums
+        ran = math.sqrt(len(nums))
+        self.seg = math.ceil(len(nums)/ran)
+        self.d = [0 for _ in range(self.seg)]
+        for i in range(len(nums)):
+            self.d[i//self.seg] += nums[i]
+        
 
     def update(self, i: int, val: int) -> None:
-        self.nums[i]=val
+        self.d[i//self.seg] += val-self.nums[i]
+        self.nums[i] = val
 
     def sumRange(self, i: int, j: int) -> int:
         s = 0
-        for n in range(i, j+1):
-            s += self.nums[n]
+        start = i//self.seg
+        end = j//self.seg
+        if start == end:
+            for idx in range(i, j+1):
+                s += self.nums[idx]
+        else:
+            for idx in range(i, (start+1)*self.seg):
+                s += self.nums[idx]
+            for idx in range(start+1, end):
+                s += self.d[idx]
+            for idx in range(end*self.seg, j+1):
+                s += self.nums[idx]
         return s
