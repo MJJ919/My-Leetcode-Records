@@ -47,3 +47,24 @@ class Solution:
         dfs(root, 0)
         s = set(d[-1])
         return lca(root)
+    
+    
+'''
+Time:O(n)
+Space:O(n)
+'''
+class Solution:
+    def lcaDeepestLeaves(self, root: TreeNode) -> TreeNode:
+        def traverse(node, level):
+            if not node:
+                return [None, level]
+            left = traverse(node.left, level+1)
+            right = traverse(node.right, level+1)
+            if left[1]==right[1]:
+                return [node, left[1]]
+            elif left[1]<right[1]:
+                return right
+            else:
+                return left
+            
+        return traverse(root, 0)[0]
