@@ -33,4 +33,5 @@ class Solution:
         
         res = 0
         traverse(root, True)
+        traverse(root, False)
         return res
