@@ -46,3 +46,23 @@ class Solution:
             else:
                 right = mid
         return left
+
+'''
+Time:O(n*n*lgn)
+Space:O(n*n)
+'''
+class Solution:
+    def swimInWater(self, grid: List[List[int]]) -> int:
+        seen = {(0, 0)}
+        heap = [(grid[0][0], 0, 0)]
+        res = 0
+        n = len(grid)
+        while heap:
+            time, r, c = heapq.heappop(heap)
+            res = max(time, res)
+            if r==c==n-1:
+                return res
+            for row, col in [(r+1, c), (r-1, c), (r, c+1), (r, c-1)]:
+                if n>row>=0 and n>col>=0 and (row, col) not in seen:
+                    seen.add((row, col))
+                    heapq.heappush(heap, (grid[row][col], row, col))
