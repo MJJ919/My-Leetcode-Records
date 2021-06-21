@@ -9,6 +9,21 @@ Output: true
 Explanation: 20 = 1
 '''
 '''
+Time:O(1)
+'''
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        if n==0:
+            return False
+        return n&(-n)==n
+        
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        if n==0:
+            return False
+        return n&(n-1)==0
+
+'''
 Time:O(lgn)
 '''
 class Solution:
@@ -18,21 +33,3 @@ class Solution:
         while n%2 == 0:
             n /= 2
         return n==1
-    
-'''
-Time:O(1)
-'''
-class Solution:
-    def isPowerOfTwo(self, n: int) -> bool:
-        if n==0:
-            return False
-        return n&(-n)==n
-        
-'''
-Time:O(n)
-'''
-class Solution:
-    def isPowerOfTwo(self, n: int) -> bool:
-        if n==0:
-            return False
-        return n&(n-1)==0
