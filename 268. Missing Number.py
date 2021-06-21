@@ -16,30 +16,24 @@ Explanation: n = 2 since there are 2 numbers, so all numbers are in the range [0
 '''
 
 '''
-Method below uses sort function.
+Time:O(n)
+Space:O(1)
 '''
-
-class Solution(object):
-    def missingNumber(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        nums = sorted(nums)
-        for i,ch in enumerate(nums):
-            if ch != i:
-                return i
-        return len(nums)
-            
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        n = len(nums)
+        bit = 0
+        for i in range(n+1):
+            bit ^= i
+        for num in nums:
+            bit ^= num
+        return bit
             
 '''
-Method below uses sum.
+Time:O(n)
+Space:O(1)
 '''
 class Solution(object):
     def missingNumber(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
         n = len(nums)
         return (n*(n+1)/2-sum(nums))
