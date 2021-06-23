@@ -16,8 +16,8 @@ Space:O(1)
 '''
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        n = len(nums)-1
-        for i in range(n-1, -1, -1):
-            if nums[i]+i>=n:
-                n = i
-        return n==0
+        pos = 0
+        for i in range(len(nums)):
+            if i<=pos:
+                pos = max(i+nums[i], pos)
+        return pos>=len(nums)-1
