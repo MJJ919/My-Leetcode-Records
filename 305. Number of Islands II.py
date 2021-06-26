@@ -38,7 +38,7 @@ class Solution:
             return parent[num]
         
         def union(n1, n2):
-            parent[n1] = n2
+            parent[find(n1)] = find(n2)
             
         for p0, p1 in positions:
             if seen[p0][p1]:
@@ -54,5 +54,4 @@ class Solution:
                     union(root2, root1)
                     count -= 1
             res.append(count)
-        return res
-        
+        return res       
