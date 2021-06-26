@@ -33,3 +33,24 @@ class Solution:
                 dfs(i)
                 res += 1
         return res
+
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        n = len(isConnected)
+        parent = [i for i in range(n)]
+        count = 0
+        def find(num):
+            if parent[num] != num:
+                parent[num] = find(parent[num])
+            return parent[num]
+        def union(num1 ,num2):
+            parent[find(num1)] = find(num2)
+            
+        for i in range(n):
+            for j in range(n):
+                if isConnected[i][j] == 1:
+                    union(i, j)
+        for i in range(n):
+            if find(i) == i:
+                count += 1
+        return count
