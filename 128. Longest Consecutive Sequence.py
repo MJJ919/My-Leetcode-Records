@@ -44,3 +44,36 @@ class Solution:
                     long = max(long,cur)
                     cur = 1
         return max(cur,long)
+    
+    
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        n = len(nums)
+        parent = [i for i in range(n)]
+        size = [1 for _ in range(n)]
+        d = {}
+        def find(num):
+            if parent[num] != num:
+                parent[num] = find(parent[num])
+            return parent[num]
+        
+        def union(n1, n2):
+            r1 = find(n1)
+            r2 = find(n2)
+            if r1 == r2:    return
+            if size[r1]>size[r2]:
+                size[r1] += size[r2]
+                parent[r2] = r1
+            else:
+                size[r2] += size[r1]
+                parent[r1] = r2
+                
+        for i in range(n):
+            if nums[i] in d:
+                continue
+            d[nums[i]] = i
+            if nums[i]-1 in d:
+                union(i, d[nums[i]-1])
+            if nums[i]+1 in d:
+                union(i, d[nums[i]+1])
+        return max(size) if size else 0
