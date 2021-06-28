@@ -11,39 +11,44 @@ getMin() -- Retrieve the minimum element in the stack.
 Time:O(1) for all operations
 Space:O(n)
 '''
-class MinStack(object):
-
+class MinStack:
     def __init__(self):
-        """
-        initialize your data structure here.
-        """
-        self.stack = []
+        self.s = []
 
-    def push(self, x):
-        """
-        :type x: int
-        :rtype: None
-        """
-        if not self.stack:
-            self.stack.append([x,x])
-            return 
-        curmin = self.stack[-1][1]
-        self.stack.append([x,min(curmin,x)])
+    def push(self, val: int) -> None:
+        if not self.s:
+            self.s.append([val, val])
+            return
+        self.s.append([val, min(self.s[-1][1], val)])
 
-    def pop(self):
-        """
-        :rtype: None
-        """
-        self.stack.pop()
+    def pop(self) -> None:
+        self.s.pop()
 
-    def top(self):
-        """
-        :rtype: int
-        """
-        return self.stack[-1][0]
+    def top(self) -> int:
+        return self.s[-1][0]
 
-    def getMin(self):
-        """
-        :rtype: int
-        """
-        return self.stack[-1][1]
+    def getMin(self) -> int:
+        return self.s[-1][1]
+
+
+class MinStack:
+    def __init__(self):
+        self.s = []
+        self.mins = []
+
+    def push(self, val: int) -> None:
+        self.s.append(val)
+        if not self.mins or self.mins[-1]>=val:
+            self.mins.append(val)
+        
+    def pop(self) -> None:
+        num = self.s.pop()
+        if self.mins[-1]==num:
+            self.mins.pop()
+        return num
+
+    def top(self) -> int:
+        return self.s[-1]
+
+    def getMin(self) -> int:
+        return self.mins[-1]
