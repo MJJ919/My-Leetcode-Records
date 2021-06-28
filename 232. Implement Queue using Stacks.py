@@ -11,6 +11,31 @@ int peek() Returns the element at the front of the queue.
 boolean empty() Returns true if the queue is empty, false otherwise.
 '''
 '''
+Time:O(1)
+Space:O(n)
+'''
+class MyQueue:
+    def __init__(self):
+        self.l1 = []
+        self.l2 = []
+
+    def push(self, x: int) -> None:
+        self.l1.append(x)
+
+    def pop(self) -> int:
+        self.peek()
+        return self.l2.pop()
+        
+    def peek(self) -> int:
+        if not self.l2:
+            while self.l1:
+                self.l2.append(self.l1.pop())
+        return self.l2[-1]
+
+    def empty(self) -> bool:
+        return False if self.l1 or self.l2 else True
+
+'''
 2 stacks
 Time:O(n) for push, O(1) for else.
 Space:O(n)
