@@ -19,6 +19,24 @@ Output: 3
 '''
 '''
 Time:O(n)
+Space:O(1)
+'''
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        fast = nums[0]
+        slow = nums[0]
+        while True:
+            fast = nums[nums[fast]]
+            slow = nums[slow]
+            if fast==slow:
+                fast = nums[0]
+                while fast!=slow:
+                    fast = nums[fast]
+                    slow = nums[slow]
+                return fast
+            
+'''
+Time:O(n)
 Space:O(n)
 '''
 class Solution(object):
