@@ -1,0 +1,29 @@
+'''
+https://leetcode.com/problems/reorganize-string/
+Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+
+Example 1:
+Input: s = "aba"
+Output: true
+'''
+'''
+Time:O(n)
+Space:O(1)
+'''
+class Solution:
+    def validPalindrome(self, s: str) -> bool:
+        def isvalid(left, right):
+            while left<=right:
+                if s[left]!=s[right]:
+                    return False
+                left += 1
+                right -=1
+            return True
+        
+        left, right = 0, len(s)-1
+        while left<=right:
+            if s[left]!=s[right]:
+                return isvalid(left, right-1) or isvalid(left+1, right)
+            left += 1
+            right -=1
+        return True
