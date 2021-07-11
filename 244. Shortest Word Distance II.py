@@ -23,8 +23,12 @@ class WordDistance:
         
     def shortest(self, word1: str, word2: str) -> int:
         l1, l2 = self.d[word1], self.d[word2]
+        i, j = 0, 0
         res = float('inf')
-        for i in l1:
-            for j in l2:
-                res = min(res, abs(i-j))
+        while i<len(l1) and j<len(l2):
+            res = min(res, abs(l1[i]-l2[j]))
+            if l1[i]>l2[j]:
+                j += 1
+            else:
+                i += 1
         return res
